@@ -1,17 +1,22 @@
-import React from "react";
-
-import Comments from "./Comments.tsx";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './Home';
+import Tasks from './Tasks';
+import Navigation from "./Navigation.tsx";
 import Header from "./Header.tsx";
-import Designers from "./Designers.tsx";
-
 
 const App: React.FC = () => {
     return (
-        <div>
-            <Header />
-            <Comments />
-            <Designers />
-        </div>
+        <Router>
+            <div>
+                <Header />
+                <Navigation />
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/tasks" element={<Tasks />} />
+                    </Routes>
+                </div>
+        </Router>
     );
 };
 
