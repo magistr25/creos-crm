@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {fetchComments} from "./apis/api.ts";
+import {fetchComments} from "./apis/apiComments.ts";
 import {Comment} from "./servises/Comment.ts";
 
 const formatDateDistanceDetailed = (createdAt: string) => {
