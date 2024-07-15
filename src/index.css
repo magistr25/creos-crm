@@ -66,3 +66,35 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+body.light {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+body.dark {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #646cff;
+}
+
+header div {
+  margin: 0 10px;
+}
+
+button {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.weekNumber {
+  font-size: 18px;
+  color: #ffffff;
+
+}
