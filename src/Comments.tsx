@@ -1,34 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-
-interface Designer {
-    avatar: string;
-    username: string;
-    thumbnails: Record<string, any>;
-}
-
-interface Comment {
-    id: number;
-    issue: string;
-    designer: Designer;
-    date_created: string;
-    message: string;
-}
-
-const fetchComments = async (): Promise<Comment[]> => {
-    try {
-        const response = await axios.get<Comment[]>('https://sandbox.creos.me/api/v1/comment/');
-        if (!response.data || !Array.isArray(response.data)) {
-            throw new Error('Ошибка при получении комментариев');
-        }
-        const commentsData = response.data;
-        commentsData.sort((a, b) => new Date(b.date_created).getTime() - new Date(a.date_created).getTime());
-        return commentsData.slice(0, 10);
-    } catch (error) {
-        console.error('Ошибка:', error);
-        return [];
-    }
-};
+import {fetchComments} from "./apis/api.ts";
+import {Comment} from "./servises/Comment.ts";
 
 const formatDateDistanceDetailed = (createdAt: string) => {
     const now = new Date();
