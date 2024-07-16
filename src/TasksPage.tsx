@@ -31,6 +31,8 @@ const TaskPage: React.FC = () => {
         return <div>{error}</div>;
     }
 
+    console.log(tasks)
+
     return (
         <div>
             <h1>Задачи</h1>

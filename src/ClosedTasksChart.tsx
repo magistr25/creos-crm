@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
-import { processData } from './dataProcessing';
+import React, { useState, useEffect } from 'react';
+import { Bar, Pie } from 'react-chartjs-2';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { processData } from './dataProcessing';
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels, ArcElement);
 
 type Task = {
     date_created: string;
@@ -17,48 +17,52 @@ type Task = {
 };
 
 const ClosedTasksChart: React.FC<{ tasks: Task[] }> = ({ tasks }) => {
-    const [weeksToShow, setWeeksToShow] = useState(8);
     const data = processData(tasks);
 
-    const labels = Object.keys(data).slice(-weeksToShow);
-    const incomeData = labels.map(week => data[parseInt(week)].income);
-    const expensesData = labels.map(week => data[parseInt(week)].expenses);
-    const profitData = labels.map(week => data[parseInt(week)].profit);
-
-    const chartData = {
-        labels,
-        datasets: [
-            {
-                label: 'Приход',
-                backgroundColor: 'rgba(66, 133, 244)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1,
-                hoverBackgroundColor: 'rgba(54, 162, 235, 0.8)',
-                hoverBorderColor: 'rgba(54, 162, 235, 1)',
-                data: incomeData,
-            },
-            {
-                label: 'Расходы',
-                backgroundColor: 'rgba(246, 178, 107)',
-                borderColor: 'rgba(255, 159, 64, 1)',
-                borderWidth: 1,
-                hoverBackgroundColor: 'rgba(255, 159, 64, 0.8)',
-                hoverBorderColor: 'rgba(255, 159, 64, 1)',
-                data: expensesData,
-            },
-            {
-                label: 'Прибыль',
-                backgroundColor: 'rgba(106, 168, 79)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1,
-                hoverBackgroundColor: 'rgba(75, 192, 192, 0.8)',
-                hoverBorderColor: 'rgba(75, 192, 192, 1)',
-                data: profitData,
-            },
-        ],
+    const getLastWeeksData = (weeks: number) => {
+        const labels = Object.keys(data).slice(-weeks);
+        return {
+            labels,
+            datasets: [
+                {
+                    label: 'Приход',
+                    backgroundColor: 'rgba(66, 133, 244)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1,
+                    hoverBackgroundColor: 'rgba(54, 162, 235, 0.8)',
+                    hoverBorderColor: 'rgba(54, 162, 235, 1)',
+                    data: labels.map(week => data[parseInt(week)].income),
+                },
+                {
+                    label: 'Расходы',
+                    backgroundColor: 'rgba(246, 178, 107)',
+                    borderColor: 'rgba(255, 159, 64, 1)',
+                    borderWidth: 1,
+                    hoverBackgroundColor: 'rgba(255, 159, 64, 0.8)',
+                    hoverBorderColor: 'rgba(255, 159, 64, 1)',
+                    data: labels.map(week => data[parseInt(week)].expenses),
+                },
+                {
+                    label: 'Прибыль',
+                    backgroundColor: 'rgba(106, 168, 79)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                    hoverBackgroundColor: 'rgba(75, 192, 192, 0.8)',
+                    hoverBorderColor: 'rgba(75, 192, 192, 1)',
+                    data: labels.map(week => data[parseInt(week)].profit),
+                },
+            ],
+        };
     };
 
-    const options = {
+    const lastMonthData = getLastWeeksData(8).datasets.map(dataset => ({
+        ...dataset,
+        data: dataset.data.slice(0, 4),
+    }));
+
+    const currentMonthData = getLastWeeksData(4);
+
+    const barOptions = {
         responsive: true,
         plugins: {
             legend: {
@@ -71,25 +75,68 @@ const ClosedTasksChart: React.FC<{ tasks: Task[] }> = ({ tasks }) => {
         },
     };
 
-    //TODO переделать график по образцу ТЗ, показывать по 4
+    // Обработка данных для круговой диаграммы
+    const [statusData, setStatusData] = useState<{ [key: string]: number }>({});
 
-    const getWeekLabel = (week: number): string => {
-        if (week === 1) return 'неделя';
-        if (week >= 2 && week <= 4) return 'недели';
-        return 'недель';
+    useEffect(() => {
+        const statusCounts: { [key: string]: number } = {};
+        tasks.forEach(task => {
+            const status = task.status;
+            if (!statusCounts[status]) {
+                statusCounts[status] = 0;
+            }
+            statusCounts[status] += 1;
+        });
+        setStatusData(statusCounts);
+    }, [tasks]);
+
+    const pieData = {
+        labels: Object.keys(statusData),
+        datasets: [
+            {
+                data: Object.values(statusData),
+                backgroundColor: ['rgba(66, 133, 244, 0.6)', 'rgba(246, 178, 107, 0.6)', 'rgba(106, 168, 79, 0.6)'],
+                borderColor: ['rgba(66, 133, 244, 1)', 'rgba(246, 178, 107, 1)', 'rgba(106, 168, 79, 1)'],
+                borderWidth: 1,
+            },
+        ],
+    };
+
+    const pieOptions = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top' as const,
+            },
+            datalabels: {
+                formatter: (value: number, context: any) => {
+                    const total = context.dataset.data.reduce((acc: number, val: number) => acc + val, 0);
+                    const percentage = ((value / total) * 100).toFixed(2) + '%';
+                    return percentage;
+                },
+                color: '#fff',
+            },
+            title: {
+                display: true,
+                text: 'Процентное соотношение статусов всех задач',
+            },
+        },
     };
 
     return (
         <div>
-
-            <select value={weeksToShow} onChange={(e) => setWeeksToShow(Number(e.target.value))}>
-                {[1, 2, 3, 4, 5, 6, 7, 8].map(week => (
-                    <option key={week} value={week}>
-                        {week} {getWeekLabel(week)}
-                    </option>
-                ))}
-            </select>
-            <Bar data={chartData} options={options} />
+            <div>
+                <h3>Финансы, прошлый месяц</h3>
+                <Bar data={{ labels: lastMonthData[0].data.map((_, idx) => `Неделя ${idx + 1}`), datasets: lastMonthData }} options={barOptions} />
+            </div>
+            <div>
+                <h3>Финансы, текущий месяц</h3>
+                <Bar data={currentMonthData} options={barOptions} />
+            </div>
+            <div>
+                <h3>Процентное соотношение статусов всех задач</h3>
+                <Pie data={pieData} options={pieOptions} />
+            </div>
         </div>
     );
 };
