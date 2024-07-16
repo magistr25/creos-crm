@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Bar, Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
@@ -33,23 +33,50 @@ const ClosedTasksChart: React.FC<{ tasks: Task[] }> = ({ tasks }) => {
         },
     };
 
+    // Обработка данных для круговой диаграммы
+    const [statusData, setStatusData] = useState<{ [key: string]: number }>({});
+
+    useEffect(() => {
+        const statusCounts: { [key: string]: number } = {};
+        tasks.forEach(task => {
+            const status = task.status;
+            if (!statusCounts[status]) {
+                statusCounts[status] = 0;
+            }
+            statusCounts[status] += 1;
+        });
+        setStatusData(statusCounts);
+    }, [tasks]);
+
     const pieData = {
-        labels: ['Выполнено', 'В процессе', 'Ожидание'],
+        labels: Object.keys(statusData),
         datasets: [
             {
-                label: 'Статусы задач',
-                data: [12, 19, 3],
-                backgroundColor: ['rgba(54, 162, 235, 0.6)', 'rgba(255, 206, 86, 0.6)', 'rgba(75, 192, 192, 0.6)'],
+                data: Object.values(statusData),
+                backgroundColor: ['rgba(66, 133, 244, 0.6)', 'rgba(246, 178, 107, 0.6)', 'rgba(106, 168, 79, 0.6)'],
+                borderColor: ['rgba(66, 133, 244, 1)', 'rgba(246, 178, 107, 1)', 'rgba(106, 168, 79, 1)'],
                 borderWidth: 1,
             },
         ],
     };
 
     const pieOptions = {
+        responsive: true,
         plugins: {
+            legend: {
+                position: 'top' as const,
+            },
             datalabels: {
+                formatter: (value: number, context: any) => {
+                    const total = context.dataset.data.reduce((acc: number, val: number) => acc + val, 0);
+                    const percentage = ((value / total) * 100).toFixed(2) + '%';
+                    return percentage;
+                },
                 color: '#fff',
-                formatter: (value: number) => `${value}%`,
+            },
+            title: {
+                display: true,
+                text: 'Процентное соотношение статусов всех задач',
             },
         },
     };
