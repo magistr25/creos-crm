@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Bar, Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { processData, getLastMonthData, getCurrentMonthData } from './dataProcessing';
+import { processData, getMonthData } from './dataProcessing';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels, ArcElement);
 
@@ -19,8 +19,9 @@ type Task = {
 const ClosedTasksChart: React.FC<{ tasks: Task[] }> = ({ tasks }) => {
     const data = processData(tasks);
 
-    const lastMonthData = getLastMonthData(data);
-    const currentMonthData = getCurrentMonthData(data);
+    const currentMonthData = getMonthData(data, 0); // текущий месяц
+    const lastMonthData = getMonthData(data, 1); // прошлый месяц
+    const previousMonthData = getMonthData(data, 2); // позапрошлый месяц
 
     const barOptions = {
         scales: {
@@ -35,6 +36,7 @@ const ClosedTasksChart: React.FC<{ tasks: Task[] }> = ({ tasks }) => {
 
     // Обработка данных для круговой диаграммы
     const [statusData, setStatusData] = useState<{ [key: string]: number }>({});
+    const [numCharts, setNumCharts] = useState<number>(2); // Новое состояние для количества графиков
 
     useEffect(() => {
         const statusCounts: { [key: string]: number } = {};
@@ -84,13 +86,31 @@ const ClosedTasksChart: React.FC<{ tasks: Task[] }> = ({ tasks }) => {
     return (
         <div>
             <div>
-                <h3>Финансы, прошлый месяц</h3>
-                <Bar data={{ labels: lastMonthData.labels, datasets: lastMonthData.datasets }} options={barOptions} />
+                <label htmlFor="numCharts">Выберите количество месяцев: </label>
+                <select id="numCharts" value={numCharts} onChange={(e) => setNumCharts(Number(e.target.value))}>
+                    <option value={1}>1</option>
+                    <option value={2}>2</option>
+                    <option value={3}>3</option>
+                </select>
             </div>
-            <div>
-                <h3>Финансы, текущий месяц</h3>
-                <Bar data={{ labels: currentMonthData.labels, datasets: currentMonthData.datasets }} options={barOptions} />
-            </div>
+            {numCharts >= 1 && (
+                <div>
+                    <h3>Финансы, текущий месяц</h3>
+                    <Bar data={{ labels: currentMonthData.labels, datasets: currentMonthData.datasets }} options={barOptions} />
+                </div>
+            )}
+            {numCharts >= 2 && (
+                <div>
+                    <h3>Финансы, прошлый месяц</h3>
+                    <Bar data={{ labels: lastMonthData.labels, datasets: lastMonthData.datasets }} options={barOptions} />
+                </div>
+            )}
+            {numCharts >= 3 && (
+                <div>
+                    <h3>Финансы, позапрошлый месяц</h3>
+                    <Bar data={{ labels: previousMonthData.labels, datasets: previousMonthData.datasets }} options={barOptions} />
+                </div>
+            )}
             <div>
                 <h3>Процентное соотношение статусов всех задач</h3>
                 <Pie data={pieData} options={pieOptions} />
