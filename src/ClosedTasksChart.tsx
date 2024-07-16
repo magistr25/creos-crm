@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
-import { processData } from './dataProcessing'; // Предполагается, что вы сохранили функции в dataProcessing.ts
+import { processData } from './dataProcessing';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels);
 
 type Task = {
     date_created: string;
@@ -29,7 +30,7 @@ const ClosedTasksChart: React.FC<{ tasks: Task[] }> = ({ tasks }) => {
         datasets: [
             {
                 label: 'Приход',
-                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                backgroundColor: 'rgba(66, 133, 244)',
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 1,
                 hoverBackgroundColor: 'rgba(54, 162, 235, 0.8)',
@@ -38,7 +39,7 @@ const ClosedTasksChart: React.FC<{ tasks: Task[] }> = ({ tasks }) => {
             },
             {
                 label: 'Расходы',
-                backgroundColor: 'rgba(255, 159, 64, 0.6)',
+                backgroundColor: 'rgba(246, 178, 107)',
                 borderColor: 'rgba(255, 159, 64, 1)',
                 borderWidth: 1,
                 hoverBackgroundColor: 'rgba(255, 159, 64, 0.8)',
@@ -47,7 +48,7 @@ const ClosedTasksChart: React.FC<{ tasks: Task[] }> = ({ tasks }) => {
             },
             {
                 label: 'Прибыль',
-                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                backgroundColor: 'rgba(106, 168, 79)',
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1,
                 hoverBackgroundColor: 'rgba(75, 192, 192, 0.8)',
@@ -70,6 +71,8 @@ const ClosedTasksChart: React.FC<{ tasks: Task[] }> = ({ tasks }) => {
         },
     };
 
+    //TODO переделать график по образцу ТЗ, показывать по 4
+
     const getWeekLabel = (week: number): string => {
         if (week === 1) return 'неделя';
         if (week >= 2 && week <= 4) return 'недели';
@@ -78,6 +81,7 @@ const ClosedTasksChart: React.FC<{ tasks: Task[] }> = ({ tasks }) => {
 
     return (
         <div>
+
             <select value={weeksToShow} onChange={(e) => setWeeksToShow(Number(e.target.value))}>
                 {[1, 2, 3, 4, 5, 6, 7, 8].map(week => (
                     <option key={week} value={week}>

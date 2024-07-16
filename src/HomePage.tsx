@@ -16,6 +16,7 @@ const Home: React.FC = () => {
                 if (Comments.fetchData && Designers.fetchData) {
                     // Запрашиваем данные для обоих компонентов
                     await Promise.all([Comments.fetchData(), Designers.fetchData()]);
+
                 }
             } catch (error) {
                 console.error('Error:', error);
@@ -32,7 +33,7 @@ const Home: React.FC = () => {
     return (
         <div>
             {isLoading ? (
-                <p>Загрузка...</p>
+                <h2>Загрузка...</h2>
             ) : (
                 <>
                     <Comments />

@@ -58,20 +58,20 @@ const Comments: React.FC & { fetchData?: () => Promise<Comment[]> } = () => {
         <div>
             <h1>Комментарии</h1>
             {comments.map(comment => (
-                <div key={comment.id} style={{ marginBottom: '20px', padding: '10px', border: '1px solid #ddd' }}>
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                <div key={comment.id} style={{marginBottom: '20px', padding: '10px', border: '1px solid #ddd'}}>
+                    <div style={{display: 'flex', alignItems: 'center'}}>
                         <img
                             src={comment.designer.avatar}
                             alt={comment.designer.username}
-                            style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '10px' }}
+                            style={{width: '50px', height: '50px', borderRadius: '50%', marginRight: '10px'}}
                         />
                         <div>
-                            <div style={{ fontWeight: 'bold' }}>{comment.designer.username}</div>
-                            <div style={{ color: 'gray' }}>{formatDateDistanceDetailed(comment.date_created)}</div>
+                            <div style={{fontWeight: 'bold'}}>{comment.designer.username}</div>
+                            <div style={{color: 'gray'}}>{formatDateDistanceDetailed(comment.date_created)}</div>
                         </div>
                     </div>
                     <div>
-                        <div style={{ fontWeight: 'bold', marginTop: '10px' }}>{comment.issue}</div>
+                        <div style={{fontWeight: 'bold', marginTop: '10px'}}>{comment.issue}</div>
                         <div>{comment.message}</div>
                     </div>
                 </div>
