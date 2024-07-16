@@ -7,3 +7,7 @@ export interface Comment {
     date_created: string;
     message: string;
 }
+
+export interface CommentsProps {
+    onLoad: () => void;
+}

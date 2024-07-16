@@ -6,7 +6,9 @@ import Navigation from "./Navigation.tsx";
 import Header from "./Header.tsx";
 import DesignersPage from "./DesignersPage.tsx";
 
+
 const App: React.FC = () => {
+
     return (
         <Router>
             <div>

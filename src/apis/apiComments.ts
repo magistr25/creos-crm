@@ -1,5 +1,5 @@
 import axios from "axios";
-import {Comment} from "../servises/Comment.ts";
+import {Comment} from "../services/Comment.ts";
 
 export const fetchComments = async (): Promise<Comment[]> => {
     try {

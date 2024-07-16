@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import {fetchComments} from "./apis/apiComments.ts";
-import {Comment} from "./servises/Comment.ts";
+import { fetchComments } from './apis/apiComments';
+import { Comment } from './services/Comment';
+import { useDispatch } from 'react-redux';
 
 const formatDateDistanceDetailed = (createdAt: string) => {
     const now = new Date();
@@ -41,8 +42,9 @@ const formatDateDistanceDetailed = (createdAt: string) => {
     }
 };
 
-const Comments: React.FC = () => {
+const Comments: React.FC & { fetchData?: () => Promise<Comment[]> } = () => {
     const [comments, setComments] = useState<Comment[]>([]);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const getComments = async () => {
@@ -50,23 +52,26 @@ const Comments: React.FC = () => {
             setComments(data);
         };
         getComments();
-    }, []);
+    }, [dispatch]);
 
     return (
         <div>
             <h1>Комментарии</h1>
             {comments.map(comment => (
-                <div key={comment.id} style={{marginBottom: '20px', padding: '10px', border: '1px solid #ddd'}}>
-                    <div style={{display: 'flex', alignItems: 'center'}}>
-                        <img src={comment.designer.avatar} alt={comment.designer.username}
-                             style={{width: '50px', height: '50px', borderRadius: '50%', marginRight: '10px'}}/>
+                <div key={comment.id} style={{ marginBottom: '20px', padding: '10px', border: '1px solid #ddd' }}>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <img
+                            src={comment.designer.avatar}
+                            alt={comment.designer.username}
+                            style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '10px' }}
+                        />
                         <div>
-                            <div style={{fontWeight: 'bold'}}>{comment.designer.username}</div>
-                            <div style={{color: 'gray'}}>{formatDateDistanceDetailed(comment.date_created)}</div>
+                            <div style={{ fontWeight: 'bold' }}>{comment.designer.username}</div>
+                            <div style={{ color: 'gray' }}>{formatDateDistanceDetailed(comment.date_created)}</div>
                         </div>
                     </div>
                     <div>
-                        <div style={{fontWeight: 'bold', marginTop: '10px'}}>{comment.issue}</div>
+                        <div style={{ fontWeight: 'bold', marginTop: '10px' }}>{comment.issue}</div>
                         <div>{comment.message}</div>
                     </div>
                 </div>
@@ -75,5 +80,9 @@ const Comments: React.FC = () => {
     );
 };
 
-export default Comments;
+Comments.fetchData = async () => {
+    const data:any = await fetchComments();
+    return data;
+};
 
+export default Comments;
