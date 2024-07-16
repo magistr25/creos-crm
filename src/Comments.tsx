@@ -41,8 +41,6 @@ const formatDateDistanceDetailed = (createdAt: string) => {
     }
 };
 
-
-
 const Comments: React.FC = () => {
     const [comments, setComments] = useState<Comment[]>([]);
 

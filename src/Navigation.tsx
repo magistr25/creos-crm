@@ -8,15 +8,18 @@ const Navigation: React.FC = () => {
                 <li>
                     <Link to="/">Главная</Link>
                 </li>
-                <li >
+                <li>
                     <Link to="/tasks">Задачи</Link>
                 </li>
-                {/* Добавьте дополнительные ссылки здесь */}
+
+                <li>
+                    <Link to="/designers">Страница дизайнеров</Link>
+                </li>
+
             </ul>
         </nav>
     );
 };
-
 
 
 export default Navigation;
