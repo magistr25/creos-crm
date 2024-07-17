@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { fetchAllDesigners, Designer } from './utils/fetchAllDesigners';
+import { handleSortChange } from './utils/handleSortChange';
 import './DesignersTable.css';
 
 export const DesignersTable: React.FC = () => {
     const [designers, setDesigners] = useState<Designer[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [sortKey, setSortKey] = useState<keyof Designer>('username');
+    const [sortOrder, setSortOrder] = useState<string>('asc');
 
     useEffect(() => {
         setLoading(true);
@@ -22,6 +25,17 @@ export const DesignersTable: React.FC = () => {
 
     return (
         <div className="table-container">
+            <div className="sort-container">
+                <label htmlFor="sort">Сортировка по: </label>
+                <select
+                    id="sort"
+                    value={sortKey}
+                    onChange={(e) => handleSortChange(e, designers, setSortKey, setDesigners, sortOrder, setSortOrder)}
+                >
+                    <option value="username">Имя</option>
+                    <option value="email">Почта</option>
+                </select>
+            </div>
             {loading && <h3>Загрузка...</h3>}
             {error && <p>Error: {error}</p>}
             {!loading && !error && designers.length > 0 && (
