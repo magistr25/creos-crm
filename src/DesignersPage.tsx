@@ -1,9 +1,9 @@
 import React from 'react';
+import { DesignersTable } from "./DesignersTable.tsx";
 const DesignersPage: React.FC = () => {
     return (
         <div>
-            <h1>Таблица дизайнеров</h1>
-
+            <DesignersTable />
         </div>
     );
 };
