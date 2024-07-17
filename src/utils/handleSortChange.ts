@@ -1,17 +1,15 @@
-import { Designer } from './fetchAllDesigners';
+import { SetStateAction } from 'react';
+import {Designer} from './fetchAllDesigners';
 
 export const handleSortChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
     designers: Designer[],
     setSortKey: React.Dispatch<React.SetStateAction<keyof Designer>>,
-    setDesigners: React.Dispatch<React.SetStateAction<Designer[]>>,
-    sortOrder: string,
-    setSortOrder: React.Dispatch<React.SetStateAction<string>>
+    setDesigners: React.Dispatch<React.SetStateAction<Designer[]>>
 ) => {
     const key = event.target.value as keyof Designer;
     setSortKey(key);
-    let order = sortOrder === 'asc' ? 'desc' : 'asc';
-    setSortOrder(order);
+    let order = 'asc';
 
     const sortedDesigners = [...designers].sort((a, b) => {
         if (a[key] < b[key]) return order === 'asc' ? -1 : 1;
@@ -21,4 +19,15 @@ export const handleSortChange = (
 
     setDesigners(sortedDesigners);
 };
+
+
+export const handleSortChangeDefault = (designers: Designer[], setDesigners: { (value: SetStateAction<Designer[]>): void; (arg0: Designer[]): void; }) => {
+    let order = 'asc';
+    const sortedDesigners = [...designers].sort((a, b) => {
+        if (a.username < b.username) return order === 'asc' ? -1 : 1;
+        if (a.username > b.username) return order === 'asc' ? 1 : -1;
+        return 0;
+    });
+    setDesigners(sortedDesigners);
+}
 
