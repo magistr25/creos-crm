@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { fetchAllDesigners, Designer } from './utils/fetchAllDesigners';
 import './DesignersTable.css';
 
@@ -7,7 +7,7 @@ export const DesignersTable: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    const handleButtonClick = () => {
+    useEffect(() => {
         setLoading(true);
         fetchAllDesigners()
             .then((data) => {
@@ -18,12 +18,11 @@ export const DesignersTable: React.FC = () => {
                 setError(error.message);
                 setLoading(false);
             });
-    };
+    }, []);
 
     return (
         <div className="table-container">
-            <button className="load-button" onClick={handleButtonClick}>Load Designers</button>
-            {loading && <p>Loading...</p>}
+            {loading && <h3>Загрузка...</h3>}
             {error && <p>Error: {error}</p>}
             {!loading && !error && designers.length > 0 && (
                 <table className="designers-table">

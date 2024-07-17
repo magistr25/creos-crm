@@ -33,7 +33,7 @@ const Home: React.FC = () => {
     return (
         <div>
             {isLoading ? (
-                <h2>Загрузка...</h2>
+                <h3>Загрузка...</h3>
             ) : (
                 <>
                     <Comments />

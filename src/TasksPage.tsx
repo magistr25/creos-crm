@@ -24,7 +24,7 @@ const TaskPage: React.FC = () => {
     }, []);
 
     if (loading) {
-        return <div>Загрузка...</div>;
+        return <h3>Загрузка...</h3>;
     }
 
     if (error) {
