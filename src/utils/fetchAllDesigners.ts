@@ -1,11 +1,21 @@
 import axios from 'axios';
 
-interface Designer {
+export interface Designer {
     avatar: string;
     username: string;
     email: string;
-    tasks_closed: number;
-    tasks_in_progress: number;
+    thumbnails: {
+        avatar: string;
+        avatar_2x: string;
+    };
+    issues: {
+        id: number;
+        key: string;
+        date_created: string;
+        date_started_by_designer: string;
+        date_finished_by_designer: string;
+        status: string;
+    }[];
 }
 
 interface ApiResponse {
@@ -14,7 +24,7 @@ interface ApiResponse {
     previous: string | null;
 }
 
-async function fetchAllDesigners(): Promise<Designer[]> {
+export async function fetchAllDesigners(): Promise<Designer[]> {
     let allDesigners: Designer[] = [];
     let page = 1;
     let next: string | null = null;
@@ -40,4 +50,3 @@ export async function main(): Promise<void> {
         console.error('Error fetching designers:', error);
     }
 }
-
