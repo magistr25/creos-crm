@@ -99,4 +99,23 @@ button {
 
 }
 
+body.light-theme {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+body.dark-theme {
+  background-color: #343a40;
+  color: #ffffff;
+}
+
+body.light-theme .task-page {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+body.dark-theme .task-page {
+  background-color: #343a40;
+  color: #ffffff;
+}
 

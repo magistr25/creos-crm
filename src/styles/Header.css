@@ -1,0 +1,25 @@
+h3 {color: white}
+.header-button {
+    min-width: 100px; /* Минимальная ширина кнопки */
+    padding: 10px; /* Внутренний отступ */
+    margin: 5px; /* Внешний отступ */
+    font-size: 14px; /* Размер шрифта */
+    border: none; /* Убираем границу */
+    border-radius: 4px; /* Закругленные углы */
+    background-color: #007bff; /* Цвет фона */
+    color: #fff; /* Цвет текста */
+    cursor: pointer; /* Курсор указателя */
+    transition: background-color 0.3s ease; /* Плавный переход цвета фона */
+}
+
+.header-button:hover {
+    background-color: #0056b3; /* Цвет фона при наведении */
+}
+
+.weekNumber {
+    font-size: 16px; /* Размер шрифта для номера недели */
+}
+.logo {
+    display: flex;
+    align-items: center;
+}

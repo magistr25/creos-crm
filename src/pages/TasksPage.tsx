@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-
 import ClosedTasksChart from '../components/ClosedTasksChart.tsx';
-import {Task, getAllDesigners} from "../apis/apiDesigner.ts";
+import { Task, getAllDesigners } from "../apis/apiDesigner.ts";
+import '../styles/TaskPage.css';
 
 const TaskPage: React.FC = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
@@ -24,22 +24,21 @@ const TaskPage: React.FC = () => {
     }, []);
 
     if (loading) {
-        return <h3>Загрузка...</h3>;
+        return <h3 className="loading">Загрузка...</h3>;
     }
 
     if (error) {
-        return <div>{error}</div>;
+        return <div className="error">{error}</div>;
     }
 
-    console.log(tasks)
-
     return (
-        <div>
-            <h1>Задачи</h1>
-            <ClosedTasksChart tasks={tasks} />
+        <div className="task-page">
+            <h1>Финансы</h1>
+            <div className="chart-container">
+                <ClosedTasksChart tasks={tasks} />
+            </div>
         </div>
     );
 };
 
 export default TaskPage;
-

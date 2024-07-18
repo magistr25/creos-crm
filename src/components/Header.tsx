@@ -3,6 +3,8 @@ import { getWeek, subHours } from 'date-fns';
 import { enUS, ru } from 'date-fns/locale';
 import { useTranslation } from 'react-i18next';
 import '../../i18n.ts';
+import '../styles/Header.css';
+
 
 const Header: React.FC = () => {
     const { t, i18n } = useTranslation();
@@ -18,7 +20,6 @@ const Header: React.FC = () => {
 
     const toggleLocale = () => {
         i18n.changeLanguage(i18n.language === 'en' ? 'ru' : 'en');
-
     };
 
     const toggleTheme = () => {
@@ -28,23 +29,24 @@ const Header: React.FC = () => {
     };
 
     return (
-        <header>
-            <div>
-                <button onClick={toggleLocale}>
-                    {i18n.language === 'en' ? t('Switch to RU') : t('Switch to EN')}
-                </button>
+        <header className="header">
+            <div className="logo">
+                <img src={'vite.svg'} alt="Logo" className="logo-image"/>
+                <h3 color='white'>Creos CRM</h3>
             </div>
-            <div>
-                <button onClick={toggleTheme}>
-                    {theme === 'light' ? t('Switch to Dark Theme') : t('Switch to Light Theme')}
-                </button>
+            <div className="weekNumber-container">
+                <p className="weekNumber">{`${t('Current Work Week Number')}: ${weekNumber}`}</p>
             </div>
-            <div >
-                <span className='weekNumber'>{`${t('Current Work Week Number')}: ${weekNumber}`}</span>
+            <div className="controls">
+                <button className="header-button locale-button" onClick={toggleLocale}>
+                    {i18n.language === 'en' ? 'RU' : 'EN'}
+                </button>
+                <button className="header-button theme-button" onClick={toggleTheme}>
+                    {theme === 'light' ? t('Dark') : t('Light')}
+                </button>
             </div>
         </header>
     );
 };
 
 export default Header;
-
