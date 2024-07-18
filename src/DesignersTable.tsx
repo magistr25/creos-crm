@@ -1,27 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { fetchAllDesigners, Designer } from './utils/fetchAllDesigners';
-import {handleSortChange, handleSortChangeDefault} from './utils/handleSortChange';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchDesigners, setSortKey, setDesigners } from './redux/designersSlice';
+import { RootState, AppDispatch } from './redux/store';
+import { handleSortChange, handleSortChangeDefault } from './utils/handleSortChange';
 import './DesignersTable.css';
 
 export const DesignersTable: React.FC = () => {
-    const [designers, setDesigners] = useState<Designer[]>([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
-    const [sortKey, setSortKey] = useState<keyof Designer>('username');
-
+    const dispatch: AppDispatch = useDispatch();
+    const { designers, loading, error, sortKey } = useSelector((state: RootState) => state.designers);
 
     useEffect(() => {
-        setLoading(true);
-        fetchAllDesigners()
-            .then((designers) => {
-                handleSortChangeDefault(designers, setDesigners);
-                setLoading(false);
-            })
-            .catch((error) => {
-                setError(error.message);
-                setLoading(false);
-            });
-    }, []);
+        dispatch(fetchDesigners()).then((result) => {
+            if (fetchDesigners.fulfilled.match(result)) {
+                handleSortChangeDefault(result.payload, (sortedDesigners) => {
+                    dispatch(setDesigners(sortedDesigners));
+                });
+            }
+        });
+    }, [dispatch]);
+
+    const handleSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        handleSortChange(e, designers, (key) => dispatch(setSortKey(key)), (sortedDesigners) => dispatch(setDesigners(sortedDesigners)));
+    };
 
     return (
         <div className="table-container">
@@ -30,7 +30,7 @@ export const DesignersTable: React.FC = () => {
                 <select
                     id="sort"
                     value={sortKey}
-                    onChange={(e) => handleSortChange(e, designers, setSortKey, setDesigners)}
+                    onChange={handleSort}
                 >
                     <option value="username">Имя</option>
                     <option value="email">Почта</option>

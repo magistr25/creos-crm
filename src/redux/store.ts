@@ -1,13 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import loadingReducer from './loadingSlice';
+import designersReducer from './designersSlice';
 
 export const store = configureStore({
     reducer: {
-        loading: loadingReducer,
+        designers: designersReducer,
     },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-
-
