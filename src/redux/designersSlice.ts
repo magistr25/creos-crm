@@ -6,6 +6,7 @@ interface DesignersState {
     loading: boolean;
     error: string | null;
     sortKey: keyof Designer;
+    filterStatus: string;
 }
 
 const initialState: DesignersState = {
@@ -13,6 +14,7 @@ const initialState: DesignersState = {
     loading: false,
     error: null,
     sortKey: 'username',
+    filterStatus: 'all',
 };
 
 export const fetchDesigners = createAsyncThunk('designers/fetchAll', async () => {
@@ -29,6 +31,9 @@ const designersSlice = createSlice({
         },
         setDesigners(state, action) {
             state.designers = action.payload;
+        },
+        setFilterStatus(state, action) { // Добавляем действие для изменения фильтра
+            state.filterStatus = action.payload;
         },
     },
     extraReducers: (builder) => {
@@ -48,5 +53,5 @@ const designersSlice = createSlice({
     },
 });
 
-export const { setSortKey, setDesigners } = designersSlice.actions;
+export const { setSortKey, setDesigners, setFilterStatus } = designersSlice.actions;
 export default designersSlice.reducer;
