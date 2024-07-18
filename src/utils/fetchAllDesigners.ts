@@ -4,7 +4,7 @@ export interface Designer {
     avatar: string;
     username: string;
     email: string;
-    status:string
+    status: string;
     thumbnails: {
         avatar: string;
         avatar_2x: string;
@@ -25,6 +25,16 @@ interface ApiResponse {
     previous: string | null;
 }
 
+// interface ApiResponseProject {
+//     results: Project[];
+// }
+
+export interface Project {
+    id: number;
+    name: string;
+    key: string;
+}
+
 export async function fetchAllDesigners(): Promise<Designer[]> {
     let allDesigners: Designer[] = [];
     let page = 1;
@@ -42,12 +52,18 @@ export async function fetchAllDesigners(): Promise<Designer[]> {
     return allDesigners;
 }
 
-export async function main(): Promise<void> {
+export async function fetchAllProjects(): Promise<Project[]> {
     try {
-        const designers = await fetchAllDesigners();
-        console.log(designers.length);  // Ожидается 256
-        console.log(designers);
+        const baseUrl = 'https://sandbox.creos.me/api/v1/project/';
+        const response = await axios.get(baseUrl);
+        if (response.status === 200) {
+            return response.data;
+        } else {
+            console.error('Error fetching projects:', response.statusText);
+            return [];
+        }
     } catch (error) {
-        console.error('Error fetching designers:', error);
+        console.error('Error fetching projects:', error);
+        return [];
     }
 }

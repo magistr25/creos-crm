@@ -1,4 +1,4 @@
-import { Designer } from './fetchAllDesigners';
+import { Designer, Project } from './fetchAllDesigners';
 
 export const handleSortChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
@@ -30,4 +30,17 @@ export const handleSortChangeDefault = (
         return 0;
     });
     setDesigners(sortedDesigners);
+};
+
+export const handleSortChangeDefaultProjects = (
+    projects: Project[],
+    setProjects: React.Dispatch<React.SetStateAction<Project[]>>
+) => {
+    let order = 'asc';
+    const sortedProjects = [...projects].sort((a, b) => {
+        if (a.name < b.name) return order === 'asc' ? -1 : 1;
+        if (a.name > b.name) return order === 'asc' ? 1 : -1;
+        return 0;
+    });
+    setProjects(sortedProjects);
 };

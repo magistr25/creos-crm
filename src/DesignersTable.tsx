@@ -1,13 +1,21 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchDesigners, setSortKey, setDesigners, setFilterStatusClosed, setFilterStatusInProgress } from './redux/designersSlice';
+import {
+    fetchDesigners,
+    setSortKey,
+    setDesigners,
+    setFilterStatusClosed,
+    setFilterStatusInProgress,
+    setFilterProject,
+    fetchProjects, setProjects
+} from './redux/designersSlice';
 import { RootState, AppDispatch } from './redux/store';
-import { handleSortChange, handleSortChangeDefault } from './utils/handleSortChange';
+import {handleSortChange, handleSortChangeDefault, handleSortChangeDefaultProjects} from './utils/handleSortChange';
 import './DesignersTable.css';
 
 export const DesignersTable: React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
-    const { designers, loading, error, sortKey, filterStatusClosed, filterStatusInProgress } = useSelector((state: RootState) => state.designers);
+    const { designers, loading, error, sortKey, filterStatusClosed, filterStatusInProgress, projects, filterProject } = useSelector((state: RootState) => state.designers);
 
     useEffect(() => {
         dispatch(fetchDesigners()).then((result) => {
@@ -17,7 +25,14 @@ export const DesignersTable: React.FC = () => {
                 });
             }
         });
-    }, [dispatch]);
+        dispatch(fetchProjects()).then((result) => {
+            if (fetchProjects.fulfilled.match(result)) {
+                handleSortChangeDefaultProjects(result.payload, (sortedProjects) => {
+                    dispatch(setProjects(sortedProjects));
+                });
+            }
+        });
+    }, []);
 
     const handleSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
         handleSortChange(e, designers, (key) => dispatch(setSortKey(key)), (sortedDesigners) => dispatch(setDesigners(sortedDesigners)));
@@ -31,10 +46,15 @@ export const DesignersTable: React.FC = () => {
         dispatch(setFilterStatusInProgress(e.target.value));
     };
 
+    const handleFilterProject = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        dispatch(setFilterProject(e.target.value));
+    };
+
     const filteredDesigners = designers.filter((designer) => {
         let closedFilter = filterStatusClosed === 'all' || designer.issues.filter(issue => issue.status === 'Done').length.toString() === filterStatusClosed;
         let inProgressFilter = filterStatusInProgress === 'all' || designer.issues.filter(issue => issue.status === 'In Progress').length.toString() === filterStatusInProgress;
-        return closedFilter && inProgressFilter;
+        let projectFilter = filterProject === 'all' || designer.issues.some(issue => issue.key.replace(/-.*/, '') === filterProject);
+        return closedFilter && inProgressFilter && projectFilter;
     });
 
     const designersDoneQ = designers.map(designer => designer.issues.filter(issue => issue.status === 'Done').length).sort((a, b) => a - b);
@@ -63,6 +83,13 @@ export const DesignersTable: React.FC = () => {
                     <option value="all">Все</option>
                     {Array.from(uniqueInProgress).map((el, index) => (
                         <option key={index} value={el.toString()}>{el}</option>
+                    ))}
+                </select>
+                <label htmlFor="filterProject">Проект: </label>
+                <select id="filterProject" value={filterProject} onChange={handleFilterProject}>
+                    <option value="all">Все</option>
+                    {projects && projects.map((project, index) => (
+                        <option key={index} value={project.key}>{project.name}</option>
                     ))}
                 </select>
             </div>
