@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import {getAllDesigners, Task} from './apis/apiDesigner';
+import {getAllDesigners, Task} from '../apis/apiDesigner.ts';
 import { formatDistance, parseISO } from 'date-fns';
 import { useDispatch } from 'react-redux';
-import { setLoading } from './redux/loadingSlice';
+import { setLoading } from '../redux/loadingSlice.ts';
 
 
 interface Designer {

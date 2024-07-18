@@ -1,5 +1,5 @@
 import React from 'react';
-import { DesignersTable } from "./DesignersTable.tsx";
+import { DesignersTable } from "../components/DesignersTable.tsx";
 const DesignersPage: React.FC = () => {
     return (
         <div>

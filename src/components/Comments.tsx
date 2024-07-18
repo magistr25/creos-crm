@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { fetchComments } from './apis/apiComments';
-import { Comment } from './services/Comment';
+import { fetchComments } from '../apis/apiComments.ts';
+import { Comment } from '../services/Comment.ts';
 import { useDispatch } from 'react-redux';
 
 const formatDateDistanceDetailed = (createdAt: string) => {

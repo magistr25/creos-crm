@@ -8,10 +8,10 @@ import {
     setFilterStatusInProgress,
     setFilterProject,
     fetchProjects, setProjects
-} from './redux/designersSlice';
-import { RootState, AppDispatch } from './redux/store';
-import {handleSortChange, handleSortChangeDefault, handleSortChangeDefaultProjects} from './utils/handleSortChange';
-import './DesignersTable.css';
+} from '../redux/designersSlice.ts';
+import { RootState, AppDispatch } from '../redux/store.ts';
+import {handleSortChange, handleSortChangeDefault, handleSortChangeDefaultProjects} from '../utils/handleSortChange.ts';
+import '../styles/DesignersTable.css';
 
 export const DesignersTable: React.FC = () => {
     const dispatch: AppDispatch = useDispatch();

@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import Comments from './Comments';
-import Designers from './Designers';
+import Comments from '../components/Comments.tsx';
+import Designers from '../components/Designers.tsx';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from './redux/store';
-import { setLoading } from './redux/loadingSlice';
+import { RootState } from '../redux/store.ts';
+import { setLoading } from '../redux/loadingSlice.ts';
 
 const Home: React.FC = () => {
     const isLoading = useSelector((state: RootState) => state.loading.isLoading);

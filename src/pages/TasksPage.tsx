@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-import ClosedTasksChart from './ClosedTasksChart';
-import {Task, getAllDesigners} from "./apis/apiDesigner.ts";
+import ClosedTasksChart from '../components/ClosedTasksChart.tsx';
+import {Task, getAllDesigners} from "../apis/apiDesigner.ts";
 
 const TaskPage: React.FC = () => {
     const [tasks, setTasks] = useState<Task[]>([]);

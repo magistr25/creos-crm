@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Bar, Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { processData, getMonthData } from './dataProcessing';
+import { processData, getMonthData } from '../utils/dataProcessing.ts';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels, ArcElement);
 
