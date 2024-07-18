@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchDesigners, setSortKey, setDesigners, setFilterStatus } from './redux/designersSlice';
+import { fetchDesigners, setSortKey, setDesigners, setFilterStatusClosed, setFilterStatusInProgress } from './redux/designersSlice';
 import { RootState, AppDispatch } from './redux/store';
 import { handleSortChange, handleSortChangeDefault } from './utils/handleSortChange';
 import './DesignersTable.css';
 
 export const DesignersTable: React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
-    const { designers, loading, error, sortKey, filterStatus } = useSelector((state: RootState) => state.designers);
+    const { designers, loading, error, sortKey, filterStatusClosed, filterStatusInProgress } = useSelector((state: RootState) => state.designers);
 
     useEffect(() => {
         dispatch(fetchDesigners()).then((result) => {
@@ -23,16 +23,25 @@ export const DesignersTable: React.FC = () => {
         handleSortChange(e, designers, (key) => dispatch(setSortKey(key)), (sortedDesigners) => dispatch(setDesigners(sortedDesigners)));
     };
 
-    const handleFilter = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        dispatch(setFilterStatus(e.target.value));
+    const handleFilterClosed = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        dispatch(setFilterStatusClosed(e.target.value));
+    };
+
+    const handleFilterInProgress = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        dispatch(setFilterStatusInProgress(e.target.value));
     };
 
     const filteredDesigners = designers.filter((designer) => {
-        if (filterStatus === 'all') return true;
-        if (filterStatus === 'inProgress') return designer.issues.some(issue => issue.status === 'In Progress');
-        if (filterStatus === 'done') return designer.issues.some(issue => issue.status === 'Done');
-        return true;
+        let closedFilter = filterStatusClosed === 'all' || designer.issues.filter(issue => issue.status === 'Done').length.toString() === filterStatusClosed;
+        let inProgressFilter = filterStatusInProgress === 'all' || designer.issues.filter(issue => issue.status === 'In Progress').length.toString() === filterStatusInProgress;
+        return closedFilter && inProgressFilter;
     });
+
+    const designersDoneQ = designers.map(designer => designer.issues.filter(issue => issue.status === 'Done').length).sort((a, b) => a - b);
+    const uniqueClosed = new Set(designersDoneQ);
+
+    const designersInProgressQ = designers.map(designer => designer.issues.filter(issue => issue.status === 'In Progress').length).sort((a, b) => a - b);
+    const uniqueInProgress = new Set(designersInProgressQ);
 
     return (
         <div className="table-container">
@@ -42,11 +51,19 @@ export const DesignersTable: React.FC = () => {
                     <option value="username">Имя</option>
                     <option value="email">Почта</option>
                 </select>
-                <label htmlFor="filter">Фильтр по статусу: </label>
-                <select id="filter" value={filterStatus} onChange={handleFilter}>
+                <label htmlFor="filterClosed">Количество закрытых: </label>
+                <select id="filterClosed" value={filterStatusClosed} onChange={handleFilterClosed}>
                     <option value="all">Все</option>
-                    <option value="inProgress">В процессе</option>
-                    <option value="done">Закрытые</option>
+                    {Array.from(uniqueClosed).map((el, index) => (
+                        <option key={index} value={el.toString()}>{el}</option>
+                    ))}
+                </select>
+                <label htmlFor="filterInProgress">Количество в процессе: </label>
+                <select id="filterInProgress" value={filterStatusInProgress} onChange={handleFilterInProgress}>
+                    <option value="all">Все</option>
+                    {Array.from(uniqueInProgress).map((el, index) => (
+                        <option key={index} value={el.toString()}>{el}</option>
+                    ))}
                 </select>
             </div>
             {loading && <h3>Загрузка...</h3>}

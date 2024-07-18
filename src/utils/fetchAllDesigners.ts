@@ -4,6 +4,7 @@ export interface Designer {
     avatar: string;
     username: string;
     email: string;
+    status:string
     thumbnails: {
         avatar: string;
         avatar_2x: string;

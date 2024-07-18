@@ -1,5 +1,4 @@
-import { SetStateAction } from 'react';
-import {Designer} from './fetchAllDesigners';
+import { Designer } from './fetchAllDesigners';
 
 export const handleSortChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
@@ -20,8 +19,10 @@ export const handleSortChange = (
     setDesigners(sortedDesigners);
 };
 
-
-export const handleSortChangeDefault = (designers: Designer[], setDesigners: { (value: SetStateAction<Designer[]>): void; (arg0: Designer[]): void; }) => {
+export const handleSortChangeDefault = (
+    designers: Designer[],
+    setDesigners: React.Dispatch<React.SetStateAction<Designer[]>>
+) => {
     let order = 'asc';
     const sortedDesigners = [...designers].sort((a, b) => {
         if (a.username < b.username) return order === 'asc' ? -1 : 1;
@@ -29,5 +30,4 @@ export const handleSortChangeDefault = (designers: Designer[], setDesigners: { (
         return 0;
     });
     setDesigners(sortedDesigners);
-}
-
+};
