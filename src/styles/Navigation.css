@@ -5,12 +5,13 @@
     width: 100%;
     display: flex;
     justify-content: center; /* Центрирование навигации */
+    align-items: center; /* Центрирование по вертикали */
     padding: 10px 20px; /* Добавление отступов по краям */
     background-color: #7f88f1;
     border-bottom: 1px solid #7f88f1;
     font-size: 18px;
     z-index: 999; /* Обеспечиваем, чтобы Navigation был выше основного контента */
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; /* Шрифт без засечек */
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     box-sizing: border-box;
 }
 
@@ -19,7 +20,9 @@
     display: flex;
     gap: 10px;
     margin: 0;
-    padding: 10px 20px; /* Добавление отступов по краям */
+    padding: 0; /* Убираем padding */
+    height: 100%; /* Занимаем всю высоту родительского блока */
+    align-items: center; /* Центрирование по вертикали */
 }
 
 .breadcrumb li {
@@ -55,14 +58,14 @@
     }
 
     .breadcrumb li {
-        padding: 8px; /* Уменьшенный отступ */
+        padding: 8px;
     }
 
     .breadcrumb a {
-        font-size: inherit; /* Сохранение текущего размера шрифта */
+        font-size: inherit;
     }
 
     .breadcrumb .active {
-        font-size: inherit; /* Сохранение текущего размера шрифта */
+        font-size: inherit;
     }
 }

@@ -28,15 +28,20 @@
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    color: black;
 }
 
 .designers-table th {
     background-color: #f2f2f2;
-    color: black;
 }
 
 .designers-table tr:nth-child(even) {
     background-color: #f9f9f9;
+}
+
+.designers-table tr:nth-child(odd) {
+    background-color: #fff;
 }
 
 .designers-table tr:hover {
@@ -94,62 +99,32 @@
         padding-left: 5px;
     }
 }
-.table-container {
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-}
 
-.sort-container {
-    margin-bottom: 20px;
-}
-
-.sort-container label {
-    margin-right: 10px;
-}
-
-.sort-container select {
-    padding: 5px 10px;
-    font-size: 16px;
-}
-
-.designers-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-.designers-table th, .designers-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-.designers-table th.tasks-centered, .designers-table td.tasks-centered {
-    text-align: center;
-}
-
-.designers-table th {
-    background-color: #f2f2f2;
-}
-
-@media (max-width: 600px) {
-    .designers-table th, .designers-table td {
-        font-size: 14px;
-        padding: 6px;
+/* Темная тема для таблицы дизайнеров */
+@media (prefers-color-scheme: dark) {
+    .designers-table {
+        background-color: #2c2c2c; /* Фон таблицы (основной) */
+        font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+        color: black; /* Цвет текста */
     }
 
-    .sort-container select {
-        font-size: 14px;
-        padding: 4px 8px;
+    .designers-table th {
+        background-color: #3a3a3a; /* Фон ячеек заголовка */
+    }
+
+    .designers-table tr:nth-child(even) {
+        background-color: #333333; /* Фон четных строк */
+    }
+
+    .designers-table tr:nth-child(odd) {
+        background-color: #2c2c2c; /* Фон нечетных строк */
+    }
+
+    .designers-table tr:hover {
+        background-color: #444444; /* Фон при наведении */
+    }
+
+    .designers-table td:before {
+        background-color: #3a3a3a; /* Фон для заголовка в ячейке */
     }
 }
-
-.controls-container {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-}
-
-

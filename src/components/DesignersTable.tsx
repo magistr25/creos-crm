@@ -66,26 +66,26 @@ export const DesignersTable: React.FC = () => {
     return (
         <div className="table-container">
             <div className="controls-container">
-                <label htmlFor="sort">Сортировка по: </label>
-                <select id="sort" value={sortKey} onChange={handleSort}>
-                    <option value="username">Имя</option>
-                    <option value="email">Почта</option>
+                <label style={{marginRight:'5px'}} htmlFor="sort">Сортировка по: </label>
+                <select style={{marginRight:'10px'}}id="sort" value={sortKey} onChange={handleSort}>
+                    <option value="username">имени</option>
+                    <option value="email">почте</option>
                 </select>
-                <label htmlFor="filterClosed">Количество закрытых: </label>
-                <select id="filterClosed" value={filterStatusClosed} onChange={handleFilterClosed}>
-                    <option value="all">Все</option>
+                <label style={{marginRight:'5px'}}htmlFor="filterClosed">Число закрытых: </label>
+                <select style={{marginRight:'10px'}}id="filterClosed" value={filterStatusClosed} onChange={handleFilterClosed}>
+                    <option value="all">все</option>
                     {Array.from(uniqueClosed).map((el, index) => (
                         <option key={index} value={el.toString()}>{el}</option>
                     ))}
                 </select>
-                <label htmlFor="filterInProgress">Количество в процессе: </label>
-                <select id="filterInProgress" value={filterStatusInProgress} onChange={handleFilterInProgress}>
-                    <option value="all">Все</option>
+                <label style={{marginRight:'5px'}}htmlFor="filterInProgress">Число в процессе: </label>
+                <select style={{marginRight:'10px'}}id="filterInProgress" value={filterStatusInProgress} onChange={handleFilterInProgress}>
+                    <option value="all">все</option>
                     {Array.from(uniqueInProgress).map((el, index) => (
                         <option key={index} value={el.toString()}>{el}</option>
                     ))}
                 </select>
-                <label htmlFor="filterProject">Проект: </label>
+                <label style={{marginRight:'5px'}}htmlFor="filterProject">Проект: </label>
                 <select id="filterProject" value={filterProject} onChange={handleFilterProject}>
                     <option value="all">Все</option>
                     {projects && projects.map((project, index) => (
