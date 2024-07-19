@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import '../../i18n.ts';
 import '../styles/Header.css';
 
-
 const Header: React.FC = () => {
     const { t, i18n } = useTranslation();
     const [theme, setTheme] = useState<'light' | 'dark'>('light');
@@ -29,10 +28,10 @@ const Header: React.FC = () => {
     };
 
     return (
-        <header className="header">
+        <header className={`header ${theme}`}>
             <div className="logo">
-                <img src={'vite.svg'} alt="Logo" className="logo-image"/>
-                <h3 color='white'>Creos CRM</h3>
+                <img src={'vite.svg'} alt="Logo" className="logo-image" />
+                <h3 style={{ color: 'white' }}>Creos CRM</h3>
             </div>
             <div className="weekNumber-container">
                 <p className="weekNumber">{`${t('Current Work Week Number')}: ${weekNumber}`}</p>

@@ -10,7 +10,7 @@ export interface Designer {
         avatar_2x: string;
     };
     issues: {
-        id: number;
+        id: string;
         key: string;
         date_created: string;
         date_started_by_designer: string;
@@ -30,7 +30,7 @@ interface ApiResponse {
 // }
 
 export interface Project {
-    id: number;
+    id: string;
     name: string;
     key: string;
 }

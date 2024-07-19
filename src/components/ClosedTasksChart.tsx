@@ -84,36 +84,62 @@ const ClosedTasksChart: React.FC<{ tasks: Task[] }> = ({ tasks }) => {
     };
 
     return (
-        <div>
-            <div>
-                <label htmlFor="numCharts">Выберите количество месяцев: </label>
-                <select id="numCharts" value={numCharts} onChange={(e) => setNumCharts(Number(e.target.value))}>
-                    <option value={1}>1</option>
-                    <option value={2}>2</option>
-                    <option value={3}>3</option>
-                </select>
+        <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            gap: '20px',
+            marginBottom: '20px',
+            width:'100%'
+        }}>
+            <div className='finans' style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                gap: '20px',
+                marginBottom: '20px',
+                width: '80%'
+            }}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <label htmlFor="numCharts" style={{ marginRight: '10px' }}>Выберите количество месяцев: </label>
+                    <select id="numCharts" value={numCharts} onChange={(e) => setNumCharts(Number(e.target.value))}>
+                        <option value={1}>1</option>
+                        <option value={2}>2</option>
+                        <option value={3}>3</option>
+                    </select>
+                </div>
+
             </div>
-            {numCharts >= 1 && (
+            <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '20px', width: '80%'}}>
+                {numCharts >= 1 && (
+                    <div className="chart" style={{color: 'black', width: '45%'}}>
+                        <h3 style={{color: 'grey'}}>Финансы, текущий месяц</h3>
+                        <Bar data={{labels: currentMonthData.labels, datasets: currentMonthData.datasets}}
+                             options={barOptions}/>
+                    </div>
+                )}
+                {numCharts >= 2 && (
+                    <div className="chart" style={{color: 'black', width: '45%'}}>
+                        <h3 style={{color: 'grey'}}>Финансы, прошлый месяц</h3>
+                        <Bar data={{labels: lastMonthData.labels, datasets: lastMonthData.datasets}}
+                             options={barOptions}/>
+                    </div>
+                )}
+                {numCharts >= 3 && (
+                    <div className="chart" style={{color: 'black', width: '45%'}}>
+                        <h3 style={{color: 'grey'}}>Финансы, позапрошлый месяц</h3>
+                        <Bar data={{labels: previousMonthData.labels, datasets: previousMonthData.datasets}}
+                             options={barOptions}/>
+                    </div>
+                )}
+            </div>
+            <div className='diagramma'>
                 <div>
-                    <h3>Финансы, текущий месяц</h3>
-                    <Bar data={{ labels: currentMonthData.labels, datasets: currentMonthData.datasets }} options={barOptions} />
+                    <h3 style={{color: 'grey'}}>Процентное соотношение статусов всех задач</h3>
+                    <Pie data={pieData} options={pieOptions}/>
                 </div>
-            )}
-            {numCharts >= 2 && (
-                <div>
-                    <h3>Финансы, прошлый месяц</h3>
-                    <Bar data={{ labels: lastMonthData.labels, datasets: lastMonthData.datasets }} options={barOptions} />
-                </div>
-            )}
-            {numCharts >= 3 && (
-                <div>
-                    <h3>Финансы, позапрошлый месяц</h3>
-                    <Bar data={{ labels: previousMonthData.labels, datasets: previousMonthData.datasets }} options={barOptions} />
-                </div>
-            )}
-            <div>
-                <h3>Процентное соотношение статусов всех задач</h3>
-                <Pie data={pieData} options={pieOptions} />
             </div>
         </div>
     );

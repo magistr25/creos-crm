@@ -1,7 +1,7 @@
 import {Designer} from "./Designer.ts";
 
 export interface Comment {
-    id: number;
+    id: string;
     issue: string;
     designer: Designer;
     date_created: string;

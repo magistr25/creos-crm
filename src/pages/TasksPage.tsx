@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ClosedTasksChart from '../components/ClosedTasksChart.tsx';
 import { Task, getAllDesigners } from "../apis/apiDesigner.ts";
-import '../styles/TaskPage.css';
+// import '../styles/TaskPage.css';
 
 const TaskPage: React.FC = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
@@ -32,8 +32,8 @@ const TaskPage: React.FC = () => {
     }
 
     return (
-        <div className="task-page">
-            <h1>Финансы</h1>
+        <div >
+            <h1>Статистика компании</h1>
             <div className="chart-container">
                 <ClosedTasksChart tasks={tasks} />
             </div>

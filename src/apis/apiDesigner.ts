@@ -6,7 +6,7 @@ export interface Task {
     date_finished_by_designer: string | null;
     date_started_by_designer: string | null;
     designer: string | null;
-    id: number;
+    id: string;
     project: string;
     received_from_client: number;
     send_to_account_manager: number;

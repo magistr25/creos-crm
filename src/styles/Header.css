@@ -1,25 +1,72 @@
-h3 {color: white}
-.header-button {
-    min-width: 100px; /* Минимальная ширина кнопки */
-    padding: 10px; /* Внутренний отступ */
-    margin: 5px; /* Внешний отступ */
-    font-size: 14px; /* Размер шрифта */
-    border: none; /* Убираем границу */
-    border-radius: 4px; /* Закругленные углы */
-    background-color: #007bff; /* Цвет фона */
-    color: #fff; /* Цвет текста */
-    cursor: pointer; /* Курсор указателя */
-    transition: background-color 0.3s ease; /* Плавный переход цвета фона */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px; /* Добавление отступов по краям */
+    z-index: 1000;
+    background-color: var(--header-background); /* Используем переменную для фона */
+    color: white;
+    margin-bottom: 60px; /* Отступ снизу для разделения */
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; /* Шрифт без засечек */
+    box-sizing: border-box;
 }
 
-.header-button:hover {
-    background-color: #0056b3; /* Цвет фона при наведении */
+.header.light {
+    background-color: var(--header-background); /* Используем переменную для фона */
+    color: white;
 }
 
-.weekNumber {
-    font-size: 16px; /* Размер шрифта для номера недели */
+.header.dark {
+    background-color: var(--header-background); /* Используем переменную для фона */
+    color: white;
 }
+
 .logo {
     display: flex;
     align-items: center;
+}
+
+.logo-image {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.weekNumber-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.weekNumber {
+    margin: 0;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+}
+
+.header-button {
+    color: #535bf2;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.header-button:hover {
+    background-color: #0056b3;
+}
+
+.header.dark .header-button {
+    background-color: #555;
+}
+
+.header.dark .header-button:hover {
+    background-color: #666;
 }

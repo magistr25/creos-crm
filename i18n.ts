@@ -13,7 +13,7 @@ const resources = {
     },
     ru: {
         translation: {
-            "Switch to RU": "Переключиться на русский",
+            "Switch to РУ": "Переключиться на русский",
             "Switch to EN": "Переключиться на английский",
             "Switch to Dark Theme": "Переключиться на темную тему",
             "Switch to Light Theme": "Переключиться на светлую тему",

@@ -15,7 +15,7 @@ const Navigation: React.FC = () => {
                     <Link to="/tasks" className={location.pathname === "/tasks" ? "active" : ""}>Задачи</Link>
                 </li>
                 <li>
-                    <Link to="/designers" className={location.pathname === "/designers" ? "active" : ""}>Страница дизайнеров</Link>
+                    <Link to="/designers" className={location.pathname === "/designers" ? "active" : ""}>Дизайнеры</Link>
                 </li>
             </ul>
         </nav>

@@ -1,10 +1,17 @@
 .navigation {
+    position: fixed;
+    top: 60px; /* Высота Header */
+    left: 0;
+    width: 100%;
     display: flex;
     justify-content: center; /* Центрирование навигации */
-    padding: 10px;
+    padding: 10px 20px; /* Добавление отступов по краям */
     background-color: #7f88f1;
     border-bottom: 1px solid #7f88f1;
     font-size: 18px;
+    z-index: 999; /* Обеспечиваем, чтобы Navigation был выше основного контента */
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; /* Шрифт без засечек */
+    box-sizing: border-box;
 }
 
 .breadcrumb {
@@ -12,7 +19,7 @@
     display: flex;
     gap: 10px;
     margin: 0;
-    padding: 10px;
+    padding: 10px 20px; /* Добавление отступов по краям */
 }
 
 .breadcrumb li {
