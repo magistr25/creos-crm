@@ -77,16 +77,16 @@ const ClosedTasksChart: React.FC<{ tasks: Task[] }> = ({ tasks }) => {
             },
             title: {
                 display: true,
-
+                text: 'Процентное соотношение статусов всех задач',
             },
         },
     };
 
     return (
         <>
-            <div className='diagramma' style={{ height: '600px', marginLeft: '25px'}}>
+            <div className="card diagramma" style={{ height: '600px', marginLeft: '25px'}}>
                 <div>
-                    <h2 style={{ color: 'grey' }}>Соотношение статусов задач в процентах</h2>
+                    <h2>Соотношение статусов задач в процентах</h2>
                     <Pie data={pieData} options={pieOptions} />
                 </div>
             </div>
@@ -107,44 +107,42 @@ const ClosedTasksChart: React.FC<{ tasks: Task[] }> = ({ tasks }) => {
                     gap: '20px',
                     marginBottom: '10px',
                     width: '100%',
-
                 }}>
-                   <h2 style={{color: 'grey', paddingLeft: '100px'}}>Финансовые показатели</h2>
+                    <h2 style={{ paddingLeft: '100px'}}>Финансовые показатели</h2>
                     <div style={{width: '100%'}}>
-
                         <div style={{display: 'flex', alignItems: 'center'}}>
                             <label htmlFor="numCharts" style={{ paddingLeft: '50px', paddingRight:'10px'}}>Выберите количество
                                 месяцев:</label>
                             <select id="numCharts" value={numCharts}
                                     onChange={(e) => setNumCharts(Number(e.target.value))}>
-                                <option value={1}>1</option>
-                                <option value={2}>2</option>
-                                <option value={3}>3</option>
+                                <option value={1}>текущий месяц</option>
+                                <option value={2}>последние 2 месяца</option>
+                                <option value={3}>последние 3 месяца</option>
                             </select>
                         </div>
                     </div>
                 </div>
                 <div className="chart-container">
                     {numCharts >= 1 && (
-                        <div className="chart" style={{ color: 'black', marginBottom: '10px' }}>
-                            <h3 style={{ color: 'grey' }}>Финансы, текущий месяц</h3>
+                        <div className="card chart" style={{ color: 'black', marginBottom: '10px' }}>
+                            <h3>Финансы, текущий месяц</h3>
                             <Bar data={{ labels: currentMonthData.labels, datasets: currentMonthData.datasets }} options={barOptions} />
                         </div>
                     )}
                     {numCharts >= 2 && (
-                        <div className="chart" style={{ color: 'black', marginBottom: '10px' }}>
-                            <h3 style={{ color: 'grey' }}>Финансы, прошлый месяц</h3>
+                        <div className="card chart" style={{ color: 'black', marginBottom: '10px' }}>
+                            <h3>Финансы, прошлый месяц</h3>
                             <Bar data={{ labels: lastMonthData.labels, datasets: lastMonthData.datasets }} options={barOptions} />
                         </div>
                     )}
                     {numCharts >= 3 && (
-                        <div className="chart" style={{ color: 'black' }}>
-                            <h3 style={{ color: 'grey' }}>Финансы, позапрошлый месяц</h3>
+                        <div className="card chart" style={{ color: 'black' }}>
+                            <h3>Финансы, позапрошлый месяц</h3>
                             <Bar data={{ labels: previousMonthData.labels, datasets: previousMonthData.datasets }} options={barOptions} />
                         </div>
                     )}
-                    {numCharts < 3 && <div className="chart-placeholder"></div>}
-                    {numCharts < 2 && <div className="chart-placeholder"></div>}
+                    {numCharts < 3 && <div className="card chart-placeholder"></div>}
+                    {numCharts < 2 && <div className="card chart-placeholder"></div>}
                 </div>
             </div>
         </>

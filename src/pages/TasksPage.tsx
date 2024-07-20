@@ -36,7 +36,7 @@ const TaskPage: React.FC = () => {
 
     return (
         <div className="content">
-            <h1>Статистика компании</h1>
+            <h1 style={{marginLeft:'80px'}}>Статистика компании</h1>
             <div className="chart-container">
                 <ClosedTasksChart tasks={tasks} />
             </div>

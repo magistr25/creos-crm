@@ -38,9 +38,8 @@ body {
   transition: background-color 0.3s, color 0.3s;
 }
 
-h1 {
-  font-size: 2.5em;
-  line-height: 1.1;
+h1, h2, h3 {
+  color: var(--color-primary); /* Задаем цвет заголовков как на домашней странице */
 }
 
 button {
@@ -60,6 +59,15 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+header .controls button {
+  margin-left: 10px; /* Добавляем отступы между кнопками в хедере */
+}
+
+header .weekNumber-container {
+  display: flex;
+  align-items: center; /* Центрируем контент по вертикали */
 }
 
 @media (prefers-color-scheme: light) {
@@ -126,14 +134,14 @@ body.dark-theme {
 }
 
 body.light-theme .card {
-  background-color: #ffffff; /* Белый фон для карточек на главной странице */
+  background-color: #ffffff; /* Белый фон для карточек */
   color: #000000;
   box-shadow: var(--card-shadow-light); /* Тень для светлой темы */
 }
 
 body.dark-theme .card {
-  background-color: var(--background-dark);
-  color: #ffffff;
+  background-color: #ffffff; /* Белый фон внутри карточек для тёмной темы */
+  color: #000000;
   box-shadow: var(--card-shadow-dark); /* Тень для тёмной темы */
 }
 
@@ -155,7 +163,6 @@ body.dark-theme .card {
   padding: 20px;
   margin-bottom: 20px;
   background-color: white;
-  box-shadow: var(--card-shadow-light); /* Тень для графиков */
 }
 
 .chart-placeholder {
@@ -178,7 +185,18 @@ body.dark-theme .card {
   border-radius: 8px;
   padding: 20px;
   background-color: white;
-  box-shadow: var(--card-shadow-light); /* Тень для диаграммы */
+}
+
+body.light-theme .chart,
+body.light-theme .diagramma,
+body.light-theme .chart-placeholder {
+  box-shadow: var(--card-shadow-light); /* Тень для светлой темы */
+}
+
+body.dark-theme .chart,
+body.dark-theme .diagramma,
+body.dark-theme .chart-placeholder {
+  box-shadow: var(--card-shadow-dark); /* Тень для тёмной темы */
 }
 
 body {
