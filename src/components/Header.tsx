@@ -1,21 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { getWeek, subHours } from 'date-fns';
-import { enUS, ru } from 'date-fns/locale';
-import { useTranslation } from 'react-i18next';
+import React, {useState, useEffect} from 'react';
+import {getWeek, subHours} from 'date-fns';
+import {enUS, ru} from 'date-fns/locale';
+import {useTranslation} from 'react-i18next';
+import {Link} from 'react-router-dom'; // Добавляем импорт Link
 import '../../i18n.ts';
 import '../styles/Header.css';
 
 const Header: React.FC = () => {
-    const { t, i18n } = useTranslation();
+    const {t, i18n} = useTranslation();
     const [theme, setTheme] = useState<'light' | 'dark'>('light');
     const [weekNumber, setWeekNumber] = useState<number>(0);
 
     useEffect(() => {
         const now = new Date();
         const adjustedDate = subHours(now, 11); // Уменьшаем на 11 часов
-        const week = getWeek(adjustedDate, { locale: i18n.language === 'en' ? enUS : ru });
+        const week = getWeek(adjustedDate, {locale: i18n.language === 'en' ? enUS : ru});
         setWeekNumber(week);
     }, [i18n.language]);
+    useEffect(() => {
+        document.body.classList.add('light');
+    }, []);
 
     const toggleLocale = () => {
         i18n.changeLanguage(i18n.language === 'en' ? 'ru' : 'en');
@@ -24,15 +28,17 @@ const Header: React.FC = () => {
     const toggleTheme = () => {
         const newTheme = theme === 'light' ? 'dark' : 'light';
         setTheme(newTheme);
-        document.body.className = newTheme; // Добавляем класс к body для переключения темы
+        document.body.className = newTheme;
     };
 
     return (
         <header className={`header ${theme}`}>
-            <div className="logo">
-                <img src={'vite.svg'} alt="Logo" className="logo-image" />
-                <h3 style={{ color: 'white' }}>Creos CRM</h3>
-            </div>
+            <Link to="/">
+                <div className="logo">
+                    <img src={'vite.svg'} alt="Logo" className="logo-image"/>
+                    <h3 style={{color: 'white'}}>Creos CRM</h3>
+                </div>
+            </Link>
             <div className="weekNumber-container">
                 <p className="weekNumber">{`${t('Current Work Week Number')}: ${weekNumber}`}</p>
             </div>

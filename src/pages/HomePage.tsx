@@ -123,8 +123,11 @@ const Home: React.FC = () => {
                 dispatch(setLoading(false));
             }
         };
-
         fetchData();
+        window.scrollTo(0, 0);
+
+        // Устанавливаем светлую тему при первом рендеринге
+        document.body.classList.add('light-theme');
     }, [dispatch]);
 
     return (
@@ -137,7 +140,7 @@ const Home: React.FC = () => {
                         <h1 style={{color: '#7f88f1'}}>Топ 10 дизайнеров</h1>
                         <div style={{display: 'flex', flexWrap: 'wrap', gap: '20px'}}>
                             {designers.map(designer => (
-                                <div key={designer.username} style={{
+                                <div key={designer.username} className="card" style={{
                                     border: '1px solid #ddd',
                                     borderRadius: '8px',
                                     padding: '10px',
@@ -157,8 +160,8 @@ const Home: React.FC = () => {
                                     />
                                     <div>
                                         <p style={{margin: '0', fontWeight: 'bold'}}>{designer.username}</p>
-                                        <p style={{margin: '0'}}><b>Медианное время:</b> {formatDistance(0, designer.medianTime * 1000)}</p>
-                                        <p style={{margin: '0'}}><b>Выполнено задач:</b>{designer.totalTasks}</p>
+                                        <p style={{margin: '0'}}><b>Медианное время: </b> {formatDistance(0, designer.medianTime * 1000)}</p>
+                                        <p style={{margin: '0'}}><b>Выполнено задач: </b>{designer.totalTasks}</p>
                                     </div>
                                 </div>
                             ))}
@@ -167,7 +170,7 @@ const Home: React.FC = () => {
                     <div>
                         <h2 style={{color: '#7f88f1', paddingTop: '20px'}}>Комментарии пользователей</h2>
                         {comments.map(comment => (
-                            <div key={comment.id} style={{
+                            <div key={comment.id} className="card" style={{
                                 marginBottom: '20px',
                                 padding: '10px',
                                 border: '1px solid #ddd',

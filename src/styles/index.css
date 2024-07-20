@@ -5,23 +5,15 @@
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --color-light: #ffffff;
-  --color-dark: #343a40; /* Сделаем фон темной темы посветлее */
+  --color-dark: #343a40;
   --color-primary: #646cff;
   --color-primary-hover: #535bf2;
   --background-light: #f0f0f0;
-  --background-dark: #343a40; /* Сделаем фон темной темы посветлее */
-  --header-background: #535bf2; /* Добавляем переменную для фона хедера */
-
-  font-family: var(--font-family);
-  line-height: var(--line-height);
-  font-weight: var(--font-weight-normal);
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: var(--color-dark);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --background-dark: #343a40;
+  --header-background: #535bf2;
+  --background-light-theme: #c8e0ff; /* Бледно-голубой цвет */
+  --card-shadow-light: 0 8px 16px rgba(0, 0, 0, 0.2); /* Более заметная тень для светлой темы */
+  --card-shadow-dark: 0 8px 16px rgba(255, 255, 255, 0.1); /* Светлая тень для тёмной темы */
 }
 
 a {
@@ -36,12 +28,13 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
   min-width: 360px;
   min-height: 100vh;
   font-family: var(--font-family);
-  padding: 0 20px; /* Добавление отступов по краям */
+  padding: 0 20px;
   transition: background-color 0.3s, color 0.3s;
 }
 
@@ -83,7 +76,7 @@ button:focus-visible {
 }
 
 body.light {
-  background-color: var(--background-light);
+  background-color: var(--background-light-theme);
   color: #333;
 }
 
@@ -95,15 +88,15 @@ body.dark {
 header {
   display: flex;
   justify-content: space-between;
-  height: 60px; /* Устанавливаем высоту */
-  padding: 10px 20px; /* Добавление отступов по краям */
-  background-color: var(--header-background); /* Используем переменную для фона */
+  height: 60px;
+  padding: 10px 20px;
+  background-color: var(--header-background);
   width: 100%;
   min-width: 360px;
   margin: 0 auto;
   border: 1px solid #e4e4e4;
   box-sizing: border-box;
-  position: fixed; /* Фиксируем хедер наверху */
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
@@ -123,7 +116,7 @@ header button {
 }
 
 body.light-theme {
-  background-color: var(--background-light);
+  background-color: var(--background-light-theme);
   color: #000000;
 }
 
@@ -132,33 +125,64 @@ body.dark-theme {
   color: #ffffff;
 }
 
-body.light-theme .task-page {
-  background-color: var(--background-light);
+body.light-theme .card {
+  background-color: #ffffff; /* Белый фон для карточек на главной странице */
   color: #000000;
+  box-shadow: var(--card-shadow-light); /* Тень для светлой темы */
 }
 
-body.dark-theme .task-page {
+body.dark-theme .card {
   background-color: var(--background-dark);
   color: #ffffff;
+  box-shadow: var(--card-shadow-dark); /* Тень для тёмной темы */
 }
 
-/* Медиа-запросы для адаптивной верстки */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 2em;
-  }
+.chart-container {
+  margin: 0 25px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
 
-  header {
-    padding: 10px;
-  }
+.chart {
+  width: 400px;
+  min-width: 360px;
+  height: 300px; /* Фиксированная высота для графиков */
+  border: 1px solid white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: white;
+  box-shadow: var(--card-shadow-light); /* Тень для графиков */
+}
 
-  .weekNumber {
-    font-size: 16px;
-  }
+.chart-placeholder {
+  width: 400px;
+  min-width: 360px;
+  height: 300px; /* Фиксированная высота для графиков */
+  border: 1px solid white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: white;
+  visibility: hidden; /* Прячем placeholder */
+}
 
-  button {
-    padding: 0.5em 1em;
-  }
+.diagramma {
+  margin-top: 20px;
+  min-width: 360px;
+  height: 300px; /* Фиксированная высота для диаграммы */
+  border: 1px solid white;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: white;
+  box-shadow: var(--card-shadow-light); /* Тень для диаграммы */
+}
+
+body {
+  padding-top: 120px;
 }
 
 @media (max-width: 480px) {
@@ -179,54 +203,20 @@ body.dark-theme .task-page {
   }
 }
 
-/* Медиа-запросы для очень маленьких экранов */
 @media (max-width: 360px) {
-  h1 {
-    font-size: 1.2em;
+  .chart-container {
+    display: block; /* Убираем display: flex */
+    height: auto;
   }
 
-  .weekNumber {
-    font-size: 12px;
+  .chart, .diagramma {
+    width: 100%; /* Фиксируем ширину графиков для маленького экрана */
+    height: 300px; /* Фиксированная высота для графиков и диаграммы */
+    margin: 10px auto; /* Центрируем графики */
+    padding: 10px; /* Добавляем внутренние отступы для контента */
   }
 
-  button {
-    padding: 0.3em 0.6em;
-    font-size: 0.8em;
+  .content {
+    margin-top: 60px; /* Высота навигации */
   }
-
-  header div {
-    margin: 0 2px;
-  }
-}
-
-.chart-container {
-  margin: 0 25px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.chart {
-  width: 400px;
-  min-width: 360px;
-  border: 1px solid white;
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 20px;
-  background-color: white;
-}
-
-.diagramma {
-  margin-top: 20px;
-  min-width: 360px;
-  border: 1px solid white;
-  border-radius: 8px;
-  padding: 20px;
-  background-color: white;
-}
-
-body {
-  padding-top: 120px; /* Высота хедера плюс высота навигации */
 }

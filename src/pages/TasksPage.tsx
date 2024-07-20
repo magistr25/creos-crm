@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ClosedTasksChart from '../components/ClosedTasksChart.tsx';
 import { Task, getAllDesigners } from "../apis/apiDesigner.ts";
-// import '../styles/TaskPage.css';
 
 const TaskPage: React.FC = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
@@ -23,6 +22,10 @@ const TaskPage: React.FC = () => {
         fetchTasks();
     }, []);
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     if (loading) {
         return <h3 className="loading">Загрузка...</h3>;
     }
@@ -32,7 +35,7 @@ const TaskPage: React.FC = () => {
     }
 
     return (
-        <div >
+        <div className="content">
             <h1>Статистика компании</h1>
             <div className="chart-container">
                 <ClosedTasksChart tasks={tasks} />
