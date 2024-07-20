@@ -115,9 +115,9 @@ const ClosedTasksChart: React.FC<{ tasks: Task[] }> = ({ tasks }) => {
                                 месяцев:</label>
                             <select id="numCharts" value={numCharts}
                                     onChange={(e) => setNumCharts(Number(e.target.value))}>
-                                <option value={1}>текущий месяц</option>
-                                <option value={2}>последние 2 месяца</option>
-                                <option value={3}>последние 3 месяца</option>
+                                <option value={1}>4 недели </option>
+                                <option value={2}>8 недель</option>
+                                <option value={3}>16 недель </option>
                             </select>
                         </div>
                     </div>

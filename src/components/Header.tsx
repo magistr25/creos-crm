@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getWeek, subHours } from 'date-fns';
 import { enUS, ru } from 'date-fns/locale';
 import { useTranslation } from 'react-i18next';
@@ -36,10 +37,10 @@ const Header: React.FC = () => {
 
     return (
         <header className={`header ${theme}`}>
-            <div className="logo">
+            <Link to="/" className="logo">
                 <img src={'vite.svg'} alt="Logo" className="logo-image" />
                 <h3 style={{ color: 'white' }}>Creos CRM</h3>
-            </div>
+            </Link>
             <div className="weekNumber-container">
                 <p className="weekNumber">{`${t('Current Work Week Number')}: ${weekNumber}`}</p>
             </div>

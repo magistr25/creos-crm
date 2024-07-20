@@ -96,6 +96,7 @@ body.dark {
 header {
   display: flex;
   justify-content: space-between;
+  align-items: center; /* Центрируем элементы по вертикали */
   height: 60px;
   padding: 10px 20px;
   background-color: var(--header-background);
@@ -108,6 +109,12 @@ header {
   top: 0;
   left: 0;
   z-index: 1000;
+}
+
+header .logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
 }
 
 header div {
@@ -133,16 +140,20 @@ body.dark-theme {
   color: #ffffff;
 }
 
-body.light-theme .card {
-  background-color: #ffffff; /* Белый фон для карточек */
+body.light-theme .card,
+body.light-theme .table-container {
+  background-color: #ffffff; /* Белый фон для карточек и таблиц */
   color: #000000;
   box-shadow: var(--card-shadow-light); /* Тень для светлой темы */
+  border-radius: 8px; /* Скругленные углы */
 }
 
-body.dark-theme .card {
-  background-color: #ffffff; /* Белый фон внутри карточек для тёмной темы */
+body.dark-theme .card,
+body.dark-theme .table-container {
+  background-color: #ffffff; /* Белый фон внутри карточек и таблиц для тёмной темы */
   color: #000000;
   box-shadow: var(--card-shadow-dark); /* Тень для тёмной темы */
+  border-radius: 8px; /* Скругленные углы */
 }
 
 .chart-container {
@@ -191,12 +202,14 @@ body.light-theme .chart,
 body.light-theme .diagramma,
 body.light-theme .chart-placeholder {
   box-shadow: var(--card-shadow-light); /* Тень для светлой темы */
+  border-radius: 8px; /* Скругленные углы */
 }
 
 body.dark-theme .chart,
 body.dark-theme .diagramma,
 body.dark-theme .chart-placeholder {
   box-shadow: var(--card-shadow-dark); /* Тень для тёмной темы */
+  border-radius: 8px; /* Скругленные углы */
 }
 
 body {
