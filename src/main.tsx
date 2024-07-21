@@ -6,6 +6,7 @@ import {Provider} from "react-redux";
 import {store} from "./redux/store.ts";
 import Header from "./components/Header.tsx";
 import {BrowserRouter} from "react-router-dom";
+import '../i18n';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
