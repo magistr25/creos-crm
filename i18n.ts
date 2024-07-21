@@ -2,33 +2,6 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
 const resources = {
-    en: {
-        translation: {
-            "Switch to RU": "Switch to RU",
-            "Switch to EN": "Switch to EN",
-            "Switch to Dark Theme": "Switch to Dark Theme",
-            "Switch to Light Theme": "Switch to Light Theme",
-            "Current Work Week Number": "Current Work Week Number",
-            "Main": "Main",
-            "Tasks": "Tasks",
-            "Designers": "Designers",
-            "Top 10 designers": "Top 10 designers",
-            "Median time:": "Median time: ",
-            "Tasks completed:": "Tasks completed: ",
-            "User's comments": "User\'s comments",
-            "minute": "minute",
-            "minutes": "minutes",
-            "minutes ": "minutes",
-            "hour": "hour",
-            "hours": "hours",
-            "hours ": "hours",
-            "day": "day",
-            "days": "days",
-            "days ": "days",
-            "just now": "just now",
-            " ago": " ago",
-        }
-    },
     ru: {
         translation: {
             "Switch to RU": "Переключиться на русский",
@@ -54,6 +27,36 @@ const resources = {
             "days ": "дней",
             "just now": "только что",
             " ago": " назад",
+            "Loading...": "Загрузка...",
+            "Company statistics": "Статистика компании",
+            "Percentage of all tasks statuses": "Процентное соотношение статусов всех задач",
+            "Task status ratio in percentages": "Соотношение статусов задач в процентах",
+            "Financial performance": "Финансовые показатели",
+            "Choose the number of weeks:": "Выберите количество недель:",
+            "4 weeks": "4 недели",
+            "8 weeks": "8 недель",
+            "12 weeks": "12 недель",
+            "weeks ": "неделя ",
+            "Finances, current month": "Финансы, текущий месяц",
+            "Finances, last month": "Финансы, прошлый месяц",
+            "Finances, month before last": "Финансы, позапрошлый месяц",
+            "Incoming": "Приход",
+            "Expenses": "Расходы",
+            "Profit": "Прибыль",
+            "Sorted by:": "Сортировка по:",
+            "Number closed:": "Число закрытых:",
+            "Number in progress:": "Число в процессе:",
+            "Project: ": "Проект: ",
+            "name": "имени",
+            "email": "почте",
+            "all": "все",
+            "Avatar": "Аватар",
+            "Username": "Имя",
+            "Email": "Почта",
+            "Tasks Closed": "Задач закрыто",
+            "Tasks In Progress": "Задач в процессе",
+            "Back": "Назад",
+            "Along": "Дальше"
         }
     }
 };

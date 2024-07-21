@@ -3,6 +3,7 @@ import { Bar, Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { processData, getMonthData } from '../utils/dataProcessing.ts';
+import {useTranslation} from "react-i18next";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels, ArcElement);
 
@@ -18,6 +19,7 @@ type Task = {
 
 const ClosedTasksChart: React.FC<{ tasks: Task[] }> = ({ tasks }) => {
     const data = processData(tasks);
+    const { t} = useTranslation();
 
     const currentMonthData = getMonthData(data, 0); // текущий месяц
     const lastMonthData = getMonthData(data, 1); // прошлый месяц
@@ -77,7 +79,7 @@ const ClosedTasksChart: React.FC<{ tasks: Task[] }> = ({ tasks }) => {
             },
             title: {
                 display: true,
-                text: 'Процентное соотношение статусов всех задач',
+                text: t('Percentage of all tasks statuses'),
             },
         },
     };
@@ -86,7 +88,7 @@ const ClosedTasksChart: React.FC<{ tasks: Task[] }> = ({ tasks }) => {
         <>
             <div className="card diagramma" style={{ height: '600px', marginLeft: '25px'}}>
                 <div>
-                    <h2>Соотношение статусов задач в процентах</h2>
+                    <h2>{t('Task status ratio in percentages')}</h2>
                     <Pie data={pieData} options={pieOptions} />
                 </div>
             </div>
@@ -108,16 +110,15 @@ const ClosedTasksChart: React.FC<{ tasks: Task[] }> = ({ tasks }) => {
                     marginBottom: '10px',
                     width: '100%',
                 }}>
-                    <h2 style={{ paddingLeft: '100px'}}>Финансовые показатели</h2>
+                    <h2 style={{ paddingLeft: '100px'}}>{t('Financial performance')}</h2>
                     <div style={{width: '100%'}}>
                         <div style={{display: 'flex', alignItems: 'center'}}>
-                            <label htmlFor="numCharts" style={{ paddingLeft: '50px', paddingRight:'10px'}}>Выберите количество
-                                месяцев:</label>
+                            <label htmlFor="numCharts" style={{ paddingLeft: '50px', paddingRight:'10px'}}>{t('Choose the number of weeks:')}</label>
                             <select id="numCharts" value={numCharts}
                                     onChange={(e) => setNumCharts(Number(e.target.value))}>
-                                <option value={1}>4 недели </option>
-                                <option value={2}>8 недель</option>
-                                <option value={3}>16 недель </option>
+                                <option value={1}>{t('4 weeks')}</option>
+                                <option value={2}>{t('8 weeks')}</option>
+                                <option value={3}>{t('12 weeks')}</option>
                             </select>
                         </div>
                     </div>
@@ -125,19 +126,19 @@ const ClosedTasksChart: React.FC<{ tasks: Task[] }> = ({ tasks }) => {
                 <div className="chart-container">
                     {numCharts >= 1 && (
                         <div className="card chart" style={{ color: 'black', marginBottom: '10px' }}>
-                            <h3>Финансы, текущий месяц</h3>
+                            <h3>{t('Finances, current month')}</h3>
                             <Bar data={{ labels: currentMonthData.labels, datasets: currentMonthData.datasets }} options={barOptions} />
                         </div>
                     )}
                     {numCharts >= 2 && (
                         <div className="card chart" style={{ color: 'black', marginBottom: '10px' }}>
-                            <h3>Финансы, прошлый месяц</h3>
+                            <h3>{t('Finances, last month')}</h3>
                             <Bar data={{ labels: lastMonthData.labels, datasets: lastMonthData.datasets }} options={barOptions} />
                         </div>
                     )}
                     {numCharts >= 3 && (
                         <div className="card chart" style={{ color: 'black' }}>
-                            <h3>Финансы, позапрошлый месяц</h3>
+                            <h3>{t('Finances, month before last')}</h3>
                             <Bar data={{ labels: previousMonthData.labels, datasets: previousMonthData.datasets }} options={barOptions} />
                         </div>
                     )}

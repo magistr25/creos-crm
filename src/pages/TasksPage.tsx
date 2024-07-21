@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import ClosedTasksChart from '../components/ClosedTasksChart.tsx';
 import { Task, getAllDesigners } from "../apis/apiDesigner.ts";
+import {useTranslation} from "react-i18next";
 
 const TaskPage: React.FC = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    const { t} = useTranslation();
 
     useEffect(() => {
         const fetchTasks = async () => {
@@ -27,7 +29,7 @@ const TaskPage: React.FC = () => {
     }, []);
 
     if (loading) {
-        return <h3 className="loading">Загрузка...</h3>;
+        return <h3 className="loading">{t('Loading...')}</h3>;
     }
 
     if (error) {
@@ -36,7 +38,7 @@ const TaskPage: React.FC = () => {
 
     return (
         <div className="content">
-            <h1 style={{marginLeft:'80px'}}>Статистика компании</h1>
+            <h1 style={{marginLeft:'80px'}}>{t('Company statistics')}</h1>
             <div className="chart-container">
                 <ClosedTasksChart tasks={tasks} />
             </div>

@@ -1,4 +1,5 @@
 import { getISOWeek, subHours, startOfMonth, endOfMonth, subMonths, eachWeekOfInterval } from 'date-fns';
+import {t} from "i18next";
 
 export const getWorkingWeek = (dateString: string): number => {
     const date = new Date(dateString);
@@ -43,12 +44,12 @@ export const getMonthData = (data: { [key: number]: { income: number; expenses: 
     const weeks = eachWeekOfInterval({ start, end }, { weekStartsOn: 1 });
     const relevantWeeks = weeks.slice(0, 4); // Ограничиваем количество недель до 4
 
-    const labels = relevantWeeks.map((_, idx) => `Неделя ${idx + 1}`);
+    const labels = relevantWeeks.map((_, idx) => t('weeks ') + `${idx + 1}`);
     return {
         labels,
         datasets: [
             {
-                label: 'Приход',
+                label: t('Incoming'),
                 backgroundColor: 'rgba(66, 133, 244)',
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 1,
@@ -60,7 +61,7 @@ export const getMonthData = (data: { [key: number]: { income: number; expenses: 
                 }),
             },
             {
-                label: 'Расходы',
+                label: t('Expenses'),
                 backgroundColor: 'rgba(246, 178, 107)',
                 borderColor: 'rgba(255, 159, 64, 1)',
                 borderWidth: 1,
@@ -72,7 +73,7 @@ export const getMonthData = (data: { [key: number]: { income: number; expenses: 
                 }),
             },
             {
-                label: 'Прибыль',
+                label: t('Profit'),
                 backgroundColor: 'rgba(106, 168, 79)',
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1,

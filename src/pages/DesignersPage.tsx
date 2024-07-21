@@ -13,6 +13,7 @@ import { RootState, AppDispatch } from '../redux/store';
 import { handleSortChange, handleSortChangeDefault, handleSortChangeDefaultProjects } from '../utils/handleSortChange';
 import Paginator from '../components/Paginator';
 import '../styles/DesignersTable.css';
+import {useTranslation} from "react-i18next";
 
 const DesignersPage: React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -109,49 +110,50 @@ const DesignersPage: React.FC = () => {
 
     const designersInProgressQ = designers.map(designer => designer.issues.filter(issue => issue.status === 'In Progress').length).sort((a, b) => a - b);
     const uniqueInProgress = new Set(designersInProgressQ);
+    const { t} = useTranslation();
 
     return (
         <div className="table-container">
             <div className="controls-container">
-                <label style={{ marginRight: '5px' }} htmlFor="sort">Сортировка по: </label>
+                <label style={{ marginRight: '5px' }} htmlFor="sort">{t('Sorted by:')}</label>
                 <select style={{ marginRight: '10px' }} id="sort" value={sortKey} onChange={handleSort}>
-                    <option value="username">имени</option>
-                    <option value="email">почте</option>
+                    <option value="username">{t('name')}</option>
+                    <option value="email">{t('email')}</option>
                 </select>
-                <label style={{ marginRight: '5px' }} htmlFor="filterClosed">Число закрытых: </label>
+                <label style={{ marginRight: '5px' }} htmlFor="filterClosed">{t('Number closed:')}</label>
                 <select style={{ marginRight: '10px' }} id="filterClosed" value={tempFilterStatusClosed} onChange={handleTempFilterClosed}>
-                    <option value="all">все</option>
+                    <option value="all">{t('all')}</option>
                     {Array.from(uniqueClosed).map((el, index) => (
                         <option key={index} value={el.toString()}>{el}</option>
                     ))}
                 </select>
-                <label style={{ marginRight: '5px' }} htmlFor="filterInProgress">Число в процессе: </label>
+                <label style={{ marginRight: '5px' }} htmlFor="filterInProgress">{t('Number in progress:')}</label>
                 <select style={{ marginRight: '10px' }} id="filterInProgress" value={tempFilterStatusInProgress} onChange={handleTempFilterInProgress}>
-                    <option value="all">все</option>
+                    <option value="all">{t('all')}</option>
                     {Array.from(uniqueInProgress).map((el, index) => (
                         <option key={index} value={el.toString()}>{el}</option>
                     ))}
                 </select>
-                <label style={{ marginRight: '5px' }} htmlFor="filterProject">Проект: </label>
+                <label style={{ marginRight: '5px' }} htmlFor="filterProject">{t('Project: ')}</label>
                 <select id="filterProject" value={tempFilterProject} onChange={handleTempFilterProject}>
-                    <option value="all">Все</option>
+                    <option value="all">{t('all')}</option>
                     {projects && projects.map((project, index) => (
                         <option key={index} value={project.key}>{project.name}</option>
                     ))}
                 </select>
             </div>
-            {loading && <h3>Загрузка...</h3>}
+            {loading && <h3>{t('Loading...')}</h3>}
             {error && <p>Error: {error}</p>}
             {!loading && !error && currentDesigners.length > 0 && (
                 <>
                     <table className="designers-table">
                         <thead>
                         <tr>
-                            <th>Avatar</th>
-                            <th>Username</th>
-                            <th>Email</th>
-                            <th className="tasks-centered">Tasks Closed</th>
-                            <th className="tasks-centered">Tasks In Progress</th>
+                            <th>{t('Avatar')}</th>
+                            <th>{t('Username')}</th>
+                            <th>{t('Email')}</th>
+                            <th className="tasks-centered">{t('Tasks Closed')}</th>
+                            <th className="tasks-centered">{t('Tasks In Progress')}</th>
                         </tr>
                         </thead>
                         <tbody>

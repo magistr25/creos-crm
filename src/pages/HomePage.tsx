@@ -137,7 +137,7 @@ const Home: React.FC = () => {
     return (
         <div>
             {isLoading ? (
-                <h3 style={{color:'#7f88f1'}}>Загрузка...</h3>
+                <h3 style={{color:'#7f88f1'}}>{t('Loading...')}</h3>
             ) : (
                 < div style={{padding: '0 50px'}}>
                     <div>

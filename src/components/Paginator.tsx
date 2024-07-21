@@ -1,6 +1,7 @@
 // components/Paginator.tsx
 import React from 'react';
 import '../styles/Paginator.css';
+import {useTranslation} from "react-i18next";
 
 interface PaginatorProps {
     currentPage: number;
@@ -10,11 +11,12 @@ interface PaginatorProps {
 }
 
 const Paginator: React.FC<PaginatorProps> = ({ currentPage, totalPages, handlePrevPage, handleNextPage }) => {
+    const { t} = useTranslation();
     return (
         <div className="pagination">
-            <button onClick={handlePrevPage} disabled={currentPage === 1}>Назад</button>
+            <button onClick={handlePrevPage} disabled={currentPage === 1}>{t('Back')}</button>
             <span>{currentPage} из {totalPages}</span>
-            <button onClick={handleNextPage} disabled={currentPage === totalPages}>Вперед</button>
+            <button onClick={handleNextPage} disabled={currentPage === totalPages}>{t('Along')}</button>
         </div>
     );
 };
