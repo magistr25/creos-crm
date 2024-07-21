@@ -1,10 +1,12 @@
-import { Designer, Project } from './fetchAllDesigners';
+import { Designer, Project } from '../services/Designer';
+import React from "react";
+
 
 export const handleSortChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
     designers: Designer[],
-    setSortKey: React.Dispatch<React.SetStateAction<keyof Designer>>,
-    setDesigners: React.Dispatch<React.SetStateAction<Designer[]>>
+    setSortKey: (key: keyof Designer) => void,
+    setDesigners: (designers: Designer[]) => void
 ) => {
     const key = event.target.value as keyof Designer;
     setSortKey(key);
@@ -21,7 +23,7 @@ export const handleSortChange = (
 
 export const handleSortChangeDefault = (
     designers: Designer[],
-    setDesigners: React.Dispatch<React.SetStateAction<Designer[]>>
+    setDesigners: (designers: Designer[]) => void
 ) => {
     let order = 'asc';
     const sortedDesigners = [...designers].sort((a, b) => {
@@ -34,7 +36,7 @@ export const handleSortChangeDefault = (
 
 export const handleSortChangeDefaultProjects = (
     projects: Project[],
-    setProjects: React.Dispatch<React.SetStateAction<Project[]>>
+    setProjects: (projects: Project[]) => void
 ) => {
     let order = 'asc';
     const sortedProjects = [...projects].sort((a, b) => {

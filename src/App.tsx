@@ -3,8 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './pages/HomePage.tsx';
 import Tasks from './pages/TasksPage.tsx';
 import Navigation from "./components/Navigation.tsx";
-import {DesignersTable} from "./pages/DesignersPage.tsx";
-
+import DesignersTable from "./pages/DesignersPage.tsx";
 
 
 

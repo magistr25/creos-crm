@@ -2,9 +2,11 @@ export interface Designer {
     avatar: string;
     username: string;
     thumbnails: Record<string, any>;
+    email: string;
+    issues: { key: string; status: string }[];
 }
 
-export interface DesignerResponse {
-    results: Designer[];
-    next: string | null;
+export interface Project {
+    key: string;
+    name: string;
 }

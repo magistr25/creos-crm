@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchAllDesigners, Designer, fetchAllProjects, Project } from '../utils/fetchAllDesigners';
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import {Designer, fetchAllDesigners, fetchAllProjects, Project} from '../utils/fetchAllDesigners';
 
 interface DesignersState {
     designers: Designer[];
@@ -24,13 +24,11 @@ const initialState: DesignersState = {
 };
 
 export const fetchDesigners = createAsyncThunk('designers/fetchAll', async () => {
-    const response = await fetchAllDesigners();
-    return response;
+    return await fetchAllDesigners();
 });
 
 export const fetchProjects = createAsyncThunk('projects/fetchAll', async () => {
-    const response = await fetchAllProjects();
-    return response;
+    return await fetchAllProjects();
 });
 
 const designersSlice = createSlice({

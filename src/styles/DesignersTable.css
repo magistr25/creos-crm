@@ -128,3 +128,33 @@
         background-color: #3a3a3a; /* Фон для заголовка в ячейке */
     }
 }
+
+.table-container {
+    margin: 20px;
+}
+
+.controls-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.designers-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.designers-table th, .designers-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.designers-table th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+.tasks-centered {
+    text-align: center;
+}
+

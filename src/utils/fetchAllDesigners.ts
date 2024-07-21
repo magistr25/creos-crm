@@ -25,10 +25,6 @@ interface ApiResponse {
     previous: string | null;
 }
 
-// interface ApiResponseProject {
-//     results: Project[];
-// }
-
 export interface Project {
     id: string;
     name: string;
