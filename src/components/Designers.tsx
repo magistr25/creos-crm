@@ -63,7 +63,6 @@ const Designers: React.FC & { fetchData?: () => Promise<Designer[]> } = () => {
 
     return (
         <div>
-            <h1>Топ 10 дизайнеров</h1>
             <ul>
                 {designers.map(designer => (
                     <li key={designer.username}>

@@ -5,6 +5,8 @@ import { setLoading } from '../redux/loadingSlice.ts';
 import { fetchComments } from '../apis/apiComments.ts';
 import { getAllDesigners, Task } from '../apis/apiDesigner.ts';
 import { formatDistance, parseISO } from 'date-fns';
+import { useTranslation } from 'react-i18next';
+import {t} from "i18next";
 
 // Типы для данных
 type Comment = {
@@ -57,19 +59,20 @@ const formatDateDistanceDetailed = (createdAt: string) => {
         }
         return forms[2];
     };
+
     if (minutes % 60 > 0) {
-        formatted.push(`${minutes % 60} ${getCorrectForm(minutes % 60, ['минута', 'минуты', 'минут'])}`);
+        formatted.push(`${minutes % 60} ${getCorrectForm(minutes % 60, [t('minute'), t('minutes'), t('minutes ')])}`);
     }
     if (hours % 24 > 0) {
-        formatted.push(`${hours % 24} ${getCorrectForm(hours % 24, ['час', 'часа', 'часов'])}`);
+        formatted.push(`${hours % 24} ${getCorrectForm(hours % 24, [t('hour'), t('hours'), t('hours ')])}`);
     }
     if (days > 0) {
-        formatted.push(`${days} ${getCorrectForm(days, ['день', 'дня', 'дней'])}`);
+        formatted.push(`${days} ${getCorrectForm(days, [t('day'), t('days'), t('days ')])}`);
     }
     if (formatted.length === 0) {
-        return 'только что';
+        return t('just now');
     } else {
-        return formatted.join(' ') + ' назад';
+        return formatted.join(' ') +  t(' ago');
     }
 };
 
@@ -79,6 +82,7 @@ const Home: React.FC = () => {
     const dispatch = useDispatch();
     const [comments, setComments] = useState<Comment[]>([]);
     const [designers, setDesigners] = useState<Designer[]>([]);
+    const { t} = useTranslation();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -137,7 +141,7 @@ const Home: React.FC = () => {
             ) : (
                 < div style={{padding: '0 50px'}}>
                     <div>
-                        <h1 style={{color: '#7f88f1'}}>Топ 10 дизайнеров</h1>
+                        <h1 style={{color: '#7f88f1'}}>{t('Top 10 designers')}</h1>
                         <div style={{display: 'flex', flexWrap: 'wrap', gap: '20px'}}>
                             {designers.map(designer => (
                                 <div key={designer.username} className="card" style={{
@@ -160,15 +164,15 @@ const Home: React.FC = () => {
                                     />
                                     <div>
                                         <p style={{margin: '0', fontWeight: 'bold'}}>{designer.username}</p>
-                                        <p style={{margin: '0'}}><b>Медианное время: </b> {formatDistance(0, designer.medianTime * 1000)}</p>
-                                        <p style={{margin: '0'}}><b>Выполнено задач: </b>{designer.totalTasks}</p>
+                                        <p style={{margin: '0'}}><b>{t('Median time:')}</b> {formatDistance(0, designer.medianTime * 1000)}</p>
+                                        <p style={{margin: '0'}}><b>{t('Tasks completed:')}</b>{designer.totalTasks}</p>
                                     </div>
                                 </div>
                             ))}
                         </div>
                     </div>
                     <div>
-                        <h2 style={{color: '#7f88f1', paddingTop: '20px'}}>Комментарии пользователей</h2>
+                        <h2 style={{color: '#7f88f1', paddingTop: '20px'}}>{t('User\'s comments')}</h2>
                         {comments.map(comment => (
                             <div key={comment.id} className="card" style={{
                                 marginBottom: '20px',

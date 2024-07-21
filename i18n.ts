@@ -11,7 +11,22 @@ const resources = {
             "Current Work Week Number": "Current Work Week Number",
             "Main": "Main",
             "Tasks": "Tasks",
-            "Designers": "Designers"
+            "Designers": "Designers",
+            "Top 10 designers": "Top 10 designers",
+            "Median time:": "Median time: ",
+            "Tasks completed:": "Tasks completed: ",
+            "User's comments": "User\'s comments",
+            "minute": "minute",
+            "minutes": "minutes",
+            "minutes ": "minutes",
+            "hour": "hour",
+            "hours": "hours",
+            "hours ": "hours",
+            "day": "day",
+            "days": "days",
+            "days ": "days",
+            "just now": "just now",
+            " ago": " ago",
         }
     },
     ru: {
@@ -23,7 +38,22 @@ const resources = {
             "Current Work Week Number": "Текущий номер рабочей недели",
             "Main": "Главная",
             "Tasks": "Задачи",
-            "Designers": "Дизайнеры"
+            "Designers": "Дизайнеры",
+            "Top 10 designers": "Топ 10 дизайнеров",
+            "Median time:": "Медианное время: ",
+            "Tasks completed:": "Выполнено задач: ",
+            "User's comments": "Комментарии пользователей",
+            "minute": "минута",
+            "minutes": "минуты",
+            "minutes ": "минут",
+            "hour": "час",
+            "hours": "часа",
+            "hours ": "часов",
+            "day": "день",
+            "days": "дня",
+            "days ": "дней",
+            "just now": "только что",
+            " ago": " назад",
         }
     }
 };
