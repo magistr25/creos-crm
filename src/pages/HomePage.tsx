@@ -134,6 +134,28 @@ const Home: React.FC = () => {
         document.body.classList.add('light-theme');
     }, [dispatch]);
 
+    function getFormatedTimes(s: string) {
+        switch (s) {
+            case "about 2 hours":
+                return t('about 2 hours')
+            case "about 3 hours":
+                return t('about 3 hours')
+            case "about 4 hours":
+                return t('about 4 hours')
+            case "about 5 hours":
+                return t('about 5 hours')
+            case "about 6 hours":
+                return t('about 6 hours')
+            case "about 7 hours":
+                return t('about 7 hours')
+            case "about 8 hours":
+                return t('about 8 hours')
+            case "about 9 hours":
+                return t('about 9 hours')
+        }
+
+    }
+
     return (
         <div>
             {isLoading ? (
@@ -164,7 +186,9 @@ const Home: React.FC = () => {
                                     />
                                     <div>
                                         <p style={{margin: '0', fontWeight: 'bold'}}>{designer.username}</p>
-                                        <p style={{margin: '0'}}><b>{t('Median time:')}</b> {formatDistance(0, designer.medianTime * 1000)}</p>
+                                        <p style={{margin: '0'}}><b>{t('Median time:')}</b> {
+                                            getFormatedTimes(formatDistance(0, designer.medianTime * 1000))
+                                        }</p>
                                         <p style={{margin: '0'}}><b>{t('Tasks completed:')}</b>{designer.totalTasks}</p>
                                     </div>
                                 </div>

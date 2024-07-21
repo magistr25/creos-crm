@@ -56,7 +56,15 @@ const resources = {
             "Tasks Closed": "Задач закрыто",
             "Tasks In Progress": "Задач в процессе",
             "Back": "Назад",
-            "Along": "Дальше"
+            "Along": "Дальше",
+            "about 2 hours": "около 2 часов",
+            "about 3 hours": "около 3 часов",
+            "about 4 hours": "около 4 часов",
+            "about 5 hours": "около 5 часов",
+            "about 6 hours": "около 6 часов",
+            "about 7 hours": "около 7 часов",
+            "about 8 hours": "около 8 часов",
+            "about 9 hours": "около 9 часов",
         }
     }
 };
