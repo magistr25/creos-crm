@@ -50,7 +50,7 @@ export const getMonthData = (data: { [key: number]: { income: number; expenses: 
         datasets: [
             {
                 label: t('Incoming'),
-                backgroundColor: 'rgba(66, 133, 244)',
+                backgroundColor: 'rgba(116, 123, 255, 1)',
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 1,
                 hoverBackgroundColor: 'rgba(54, 162, 235, 0.8)',
@@ -62,7 +62,7 @@ export const getMonthData = (data: { [key: number]: { income: number; expenses: 
             },
             {
                 label: t('Expenses'),
-                backgroundColor: 'rgba(246, 178, 107)',
+                backgroundColor: 'rgb(255, 184, 0)',
                 borderColor: 'rgba(255, 159, 64, 1)',
                 borderWidth: 1,
                 hoverBackgroundColor: 'rgba(255, 159, 64, 0.8)',
@@ -74,7 +74,7 @@ export const getMonthData = (data: { [key: number]: { income: number; expenses: 
             },
             {
                 label: t('Profit'),
-                backgroundColor: 'rgba(106, 168, 79)',
+                backgroundColor: 'rgb(0, 211, 243)',
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1,
                 hoverBackgroundColor: 'rgba(75, 192, 192, 0.8)',

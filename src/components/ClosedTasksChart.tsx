@@ -56,7 +56,7 @@ const ClosedTasksChart: React.FC<{ tasks: Task[] }> = ({ tasks }) => {
         datasets: [
             {
                 data: Object.values(statusData),
-                backgroundColor: ['rgba(66, 133, 244, 0.6)', 'rgba(246, 178, 107, 0.6)', 'rgba(106, 168, 79, 0.6)'],
+                backgroundColor: ['rgba(116, 123, 255, 1)', 'rgb(255, 184, 0)', 'rgb(0, 211, 243)'],
                 borderColor: ['rgba(66, 133, 244, 1)', 'rgba(246, 178, 107, 1)', 'rgba(106, 168, 79, 1)'],
                 borderWidth: 1,
             },
