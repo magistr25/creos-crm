@@ -34,3 +34,45 @@ body {
     flex: 1;
     padding: 0 20px;
 }
+.table-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.designers-table {
+    width: 100%;
+    max-width: 1200px; /* Максимальная ширина таблицы */
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.designers-table th, .designers-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.designers-table th {
+    background-color: #f2f2f2;
+}
+
+.controls-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .controls-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}

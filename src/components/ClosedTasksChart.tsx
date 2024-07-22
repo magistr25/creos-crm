@@ -113,7 +113,7 @@ const ClosedTasksChart: React.FC<{ tasks: Task[] }> = ({ tasks }) => {
                     <h2 style={{ paddingLeft: '100px'}}>{t('Financial performance')}</h2>
                     <div style={{width: '100%'}}>
                         <div style={{display: 'flex', alignItems: 'center'}}>
-                            <label htmlFor="numCharts" style={{ paddingLeft: '50px', paddingRight:'10px'}}>{t('Choose the number of weeks:')}</label>
+                            <label htmlFor="numCharts" style={{ marginLeft: '50px', paddingLeft: '50px', paddingRight:'10px'}}>{t('Choose the number of weeks:')}</label>
                             <select id="numCharts" value={numCharts}
                                     onChange={(e) => setNumCharts(Number(e.target.value))}>
                                 <option value={1}>{t('4 weeks')}</option>

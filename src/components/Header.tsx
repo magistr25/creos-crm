@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { getWeek, subHours } from 'date-fns';
-import { enUS, ru } from 'date-fns/locale';
-import { useTranslation } from 'react-i18next';
+import React, {useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
+import {getWeek, subHours} from 'date-fns';
+import {enUS, ru} from 'date-fns/locale';
+import {useTranslation} from 'react-i18next';
 import '../../i18n.ts';
 import '../styles/Header.css';
 
 const Header: React.FC = () => {
-    const { t, i18n } = useTranslation();
+    const {t, i18n} = useTranslation();
     const [theme, setTheme] = useState<'light' | 'dark'>('light');
     const [weekNumber, setWeekNumber] = useState<number>(0);
 
     useEffect(() => {
         const now = new Date();
         const adjustedDate = subHours(now, 11); // Уменьшаем на 11 часов
-        const week = getWeek(adjustedDate, { locale: i18n.language === 'en' ? enUS : ru });
+        const week = getWeek(adjustedDate, {locale: i18n.language === 'en' ? enUS : ru});
         setWeekNumber(week);
 
         // Устанавливаем начальную тему
@@ -36,24 +36,30 @@ const Header: React.FC = () => {
     };
 
     return (
-        <header className={`header ${theme}`}>
-            <Link to="/" className="logo">
-                <img src={'vite.svg'} alt="Logo" className="logo-image" />
-                <h3 style={{ color: 'white' }}>Creos CRM</h3>
-            </Link>
-            <div className="weekNumber-container">
-                <p className="weekNumber">{`${t('Current Work Week Number')}: ${weekNumber}`}</p>
-            </div>
-            <div className="controls">
-                <button className="header-button locale-button" onClick={toggleLocale}>
-                    {i18n.language === 'en' ? 'RU' : 'EN'}
-                </button>
-                <button className="header-button theme-button" onClick={toggleTheme}>
-                    {theme === 'light' ? t('Dark') : t('Light')}
-                </button>
-            </div>
-        </header>
-    );
+             <header className={`header ${theme}`} style={{ alignItems: 'center', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
+                 <Link to="/" className="logo">
+                     <img src={'vite.svg'} alt="Logo" className="logo-image"/>
+                     <h1 style={{color: 'white', marginLeft: '10px'}}>Creos CRM</h1>
+                 </Link>
+                 <div style={{height:'100%',  display: 'flex', alignItems: 'center'}} >
+
+                    <div className="weekNumber-container">
+                        <p className="weekNumber">{`${t('Current Work Week Number')}: ${weekNumber}`}</p>
+                    </div>
+                    <div className="controls" >
+                        <button className="header-button locale-button" onClick={toggleLocale}>
+                            {i18n.language === 'en' ? 'RU' : 'EN'}
+                        </button>
+                        <button className="header-button theme-button" onClick={toggleTheme}>
+
+                {theme === 'light' ? t('Dark') : t('Light')}
+                        </button>
+                    </div>
+                </div>
+             </header>
+
+    )
+        ;
 };
 
 export default Header;
