@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import ClosedTasksChart from '../components/ClosedTasksChart.tsx';
-import { Task, getAllDesigners } from "../apis/apiDesigner.ts";
+import React, {useEffect, useState} from 'react';
+import ClosedTasksChart from '../components/ClosedTasksChart';
+import {Task, getAllDesigners} from "../apis/apiDesigner";
 import {useTranslation} from "react-i18next";
+import '../styles/TaskPage.css';
 
 const TaskPage: React.FC = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-    const { t} = useTranslation();
+    const {t} = useTranslation();
 
     useEffect(() => {
         const fetchTasks = async () => {
@@ -37,10 +38,13 @@ const TaskPage: React.FC = () => {
     }
 
     return (
-        <div className="content">
-            <h1 style={{marginLeft:'80px'}}>{t('Company statistics')}</h1>
-            <div className="chart-container">
-                <ClosedTasksChart tasks={tasks} />
+        <div className="content" >
+
+            <div className="chart-container" >
+                <div className="chart-item">
+                    <h1>{t('Company statistics')}</h1>
+                    <ClosedTasksChart tasks={tasks}/>
+                </div>
             </div>
         </div>
     );

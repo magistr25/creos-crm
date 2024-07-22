@@ -79,16 +79,16 @@ const ClosedTasksChart: React.FC<{ tasks: Task[] }> = ({ tasks }) => {
             },
             title: {
                 display: true,
-                text: t('Percentage of all tasks statuses'),
+                // text: t('Percentage of all tasks statuses'),
             },
         },
     };
 
     return (
-        <>
-            <div className="card diagramma" style={{ height: '600px', marginLeft: '25px'}}>
+        <div style={{display: 'flex'}} >
+            <div className="card diagramma" style={{ height: '100%', marginLeft: '25px', display: 'inline-block' }}>
                 <div>
-                    <h2>{t('Task status ratio in percentages')}</h2>
+                    <h3 style={{textAlign: 'center'}}>{t('Task status ratio in percentages')}</h3>
                     <Pie data={pieData} options={pieOptions} />
                 </div>
             </div>
@@ -123,11 +123,12 @@ const ClosedTasksChart: React.FC<{ tasks: Task[] }> = ({ tasks }) => {
                         </div>
                     </div>
                 </div>
-                <div className="chart-container">
+                <div className="chart-container" >
                     {numCharts >= 1 && (
-                        <div className="card chart" style={{ color: 'black', marginBottom: '10px' }}>
-                            <h3>{t('Finances, current month')}</h3>
-                            <Bar data={{ labels: currentMonthData.labels, datasets: currentMonthData.datasets }} options={barOptions} />
+                        <div className="card chart" style={{color: 'black', marginBottom: '10px'}}>
+                            <h3 style={{textAlign: 'center'}}>{t('Finances, current month')}</h3>
+                            <Bar data={{labels: currentMonthData.labels, datasets: currentMonthData.datasets}}
+                                 options={barOptions}/>
                         </div>
                     )}
                     {numCharts >= 2 && (
@@ -146,7 +147,7 @@ const ClosedTasksChart: React.FC<{ tasks: Task[] }> = ({ tasks }) => {
                     {numCharts < 2 && <div className="card chart-placeholder"></div>}
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

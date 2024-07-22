@@ -21,6 +21,7 @@ a {
     color: var(--color-primary);
     text-decoration: inherit;
 }
+
 a:hover {
     color: var(--color-primary-hover);
 }
@@ -53,9 +54,11 @@ button {
     cursor: pointer;
     transition: border-color 0.25s;
 }
+
 button:hover {
     border-color: var(--color-primary);
 }
+
 button:focus,
 button:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
@@ -66,9 +69,11 @@ button:focus-visible {
         color: #213547;
         background-color: var(--color-light);
     }
+
     a:hover {
         color: #747bff;
     }
+
     button {
         background-color: #f9f9f9;
     }
@@ -87,9 +92,7 @@ body.dark {
 header {
     display: flex;
     justify-content: space-between;
-    height: 60px;
-    padding: 10px 20px;
-    background-color: var(--header-background);
+    align-items: flex-start;
     width: 100%;
     min-width: 360px;
     margin: 0 auto;
@@ -194,7 +197,7 @@ body {
     padding-top: 120px;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 360px) {
     h1 {
         font-size: 1.5em;
     }
@@ -203,29 +206,8 @@ body {
         font-size: 14px;
     }
 
-    button {
-        padding: 0.4em 0.8em;
-    }
-
     header div {
         margin: 0 5px;
     }
 }
 
-@media (max-width: 360px) {
-    .chart-container {
-        display: block; /* Убираем display: flex */
-        height: auto;
-    }
-
-    .chart, .diagramma {
-        width: 100%; /* Фиксируем ширину графиков для маленького экрана */
-        height: 300px; /* Фиксированная высота для графиков и диаграммы */
-        margin: 10px auto; /* Центрируем графики */
-        padding: 10px; /* Добавляем внутренние отступы для контента */
-    }
-
-    .content {
-        margin-top: 60px; /* Высота навигации */
-    }
-}
