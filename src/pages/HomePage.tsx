@@ -163,7 +163,7 @@ const Home: React.FC = () => {
             ) : (
                 < div style={{padding: '0 50px'}}>
                     <div>
-                        <h1 style={{color: '#7f88f1'}}>{t('Top 10 designers')}</h1>
+                        <h1 style={{color: '#7f88f1', marginBottom: '20px'}}>{t('Top 10 designers')}</h1>
                         <div style={{display: 'flex', flexWrap: 'wrap', gap: '20px'}}>
                             {designers.map(designer => (
                                 <div key={designer.username} className="card" style={{
@@ -196,7 +196,7 @@ const Home: React.FC = () => {
                         </div>
                     </div>
                     <div>
-                        <h2 style={{color: '#7f88f1', paddingTop: '20px'}}>{t('User\'s comments')}</h2>
+                        <h2 style={{color: '#7f88f1', paddingTop: '20px', paddingBottom: '20px'}}>{t('User\'s comments')}</h2>
                         {comments.map(comment => (
                             <div key={comment.id} className="card" style={{
                                 marginBottom: '20px',

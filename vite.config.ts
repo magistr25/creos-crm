@@ -1,11 +1,10 @@
 import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
 import { createHtmlPlugin } from 'vite-plugin-html';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-    base: './',
-    plugins: [
-        react(),
+    base: '/creos-crm/',
+    plugins: [react(),
         createHtmlPlugin({
             inject: {
                 data: {
@@ -14,8 +13,7 @@ export default defineConfig({
           `
                 }
             }
-        })
-    ],
+        })],
     build: {
         rollupOptions: {
             output: {
@@ -26,9 +24,8 @@ export default defineConfig({
                 }
             }
         },
-        chunkSizeWarningLimit: 1000,
         outDir: 'build',
-        assetsDir: 'assets'
+        assetsDir: 'assets',
+        chunkSizeWarningLimit: 1000
     }
 });
-
