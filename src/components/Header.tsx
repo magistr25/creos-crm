@@ -37,8 +37,8 @@ const Header: React.FC = () => {
 
     return (
              <header className={`header ${theme}`} style={{ alignItems: 'center', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
-                 <Link to="/" className="logo">
-                     <img src={'vite.svg'} alt="Logo" className="logo-image"/>
+                 <Link to="/creos-crm/" className="logo">
+                     <img src="https://vite-docs-ru.vercel.app/logo.svg" alt="Logo" className="logo-image" width='32px' height='32px'/>
                      <h1 style={{color: 'white', marginLeft: '10px'}}>Creos CRM</h1>
                  </Link>
                  <div style={{height:'100%',  display: 'flex', alignItems: 'center'}} >

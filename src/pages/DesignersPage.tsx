@@ -159,7 +159,7 @@ const DesignersPage: React.FC = () => {
                         <tbody>
                         {currentDesigners.map((designer, index) => (
                             <tr key={index}>
-                                <td><img src={designer.avatar} alt="avatar" width="50" /></td>
+                                <td><img src={designer.avatar} alt="avatar" style={{width:"50px"}}/></td>
                                 <td>{designer.username}</td>
                                 <td>{designer.email}</td>
                                 <td className="tasks-centered">{designer.issues.filter(issue => issue.status === 'Done').length}</td>

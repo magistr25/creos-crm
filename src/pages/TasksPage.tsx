@@ -41,7 +41,7 @@ const TaskPage: React.FC = () => {
         <div className="content" >
 
             <div className="chart-container" >
-                <div className="chart-item">
+                <div>
                     <h1 style={{paddingLeft: '50px'}}>{t('Company statistics')}</h1>
                     <ClosedTasksChart tasks={tasks}/>
                 </div>

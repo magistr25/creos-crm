@@ -11,13 +11,13 @@ const Navigation: React.FC = () => {
         <nav className="navigation">
             <ul className="breadcrumb">
                 <li>
-                    <Link to="/" className={location.pathname === "/" ? "active" : ""}>{t('Main')}</Link>
+                    <Link to="/creos-crm/" className={location.pathname === "/creos-crm/" ? "active" : ""}>{t('Main')}</Link>
                 </li>
                 <li>
-                    <Link to="/tasks" className={location.pathname === "/tasks" ? "active" : ""}>{t('Tasks')}</Link>
+                    <Link to="/creos-crm/tasks" className={location.pathname === "/creos-crm/tasks" ? "active" : ""}>{t('Tasks')}</Link>
                 </li>
                 <li>
-                    <Link to="/designers" className={location.pathname === "/designers" ? "active" : ""}>{t('Designers')}</Link>
+                    <Link to="/creos-crm/designers" className={location.pathname === "/creos-crm/designers" ? "active" : ""}>{t('Designers')}</Link>
                 </li>
             </ul>
         </nav>

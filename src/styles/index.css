@@ -49,25 +49,23 @@ button {
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-medium);
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: white;
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover {
-  border-color: var(--color-primary);
-}
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
 header .controls button {
-  margin-left: 10px; /* Добавляем отступы между кнопками в хедере */
+  margin-left: 10px;
 }
 
 header .weekNumber-container {
   display: flex;
-  align-items: center; /* Центрируем контент по вертикали */
+  align-items: center;
 }
 
 @media (prefers-color-scheme: light) {
@@ -157,7 +155,7 @@ body.dark-theme .table-container {
 }
 
 .chart-container {
-  margin: 0 25px;
+  margin: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
