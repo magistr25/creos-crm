@@ -236,7 +236,7 @@ body {
 
 @media (max-width: 360px) {
   .chart-container {
-    display: block; /* Убираем display: flex */
+    display: block;
     height: auto;
   }
 
@@ -252,4 +252,30 @@ body {
   }
 }
 
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Добавляем плавный переход для трансформации и тени */
+}
+
+.card:hover, .card:active, .card:focus {
+  transform: translateY(-10px); /* Сдвигаем карточку вверх при наведении или активации */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Добавляем более сильную тень при наведении или активации */
+}
+
+body.light-theme .card:hover,
+body.light-theme .card:active,
+body.light-theme .card:focus,
+body.light-theme .table-container:hover,
+body.light-theme .table-container:active,
+body.light-theme .table-container:focus {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Тень при наведении или активации для светлой темы */
+}
+
+body.dark-theme .card:hover,
+body.dark-theme .card:active,
+body.dark-theme .card:focus,
+body.dark-theme .table-container:hover,
+body.dark-theme .table-container:active,
+body.dark-theme .table-container:focus {
+  box-shadow: 0 12px 24px rgba(255, 255, 255, 0.2); /* Тень при наведении или активации для тёмной темы */
+}
 

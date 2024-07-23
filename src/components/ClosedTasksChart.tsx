@@ -126,7 +126,7 @@ const ClosedTasksChart: React.FC<{ tasks: Task[] }> = ({ tasks }) => {
                 <div className="chart-container" >
                     {numCharts >= 1 && (
                         <div className="card chart" style={{color: 'black', marginBottom: '10px'}}>
-                            <h3 style={{textAlign: 'center'}}>{t('Finances, current month')}</h3>
+                            <h3>{t('Finances, current month')}</h3>
                             <Bar data={{labels: currentMonthData.labels, datasets: currentMonthData.datasets}}
                                  options={barOptions}/>
                         </div>
