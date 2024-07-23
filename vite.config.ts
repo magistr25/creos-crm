@@ -17,7 +17,17 @@ export default defineConfig({
         })
     ],
     build: {
-        outDir: 'dist',
+        rollupOptions: {
+            output: {
+                manualChunks(id) {
+                    if (id.includes('node_modules')) {
+                        return 'vendor';
+                    }
+                }
+            }
+        },
+        chunkSizeWarningLimit: 1000,
+        outDir: 'build',
         assetsDir: 'assets'
     }
 });
