@@ -1,12 +1,14 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {Designer, fetchAllDesigners, fetchAllProjects, Project} from '../utils/fetchAllDesigners';
 
+type SortKey = 'username' | 'email';
+
 interface DesignersState {
     designers: Designer[];
     projects: Project[];
     loading: boolean;
     error: string | null;
-    sortKey: keyof Designer;
+    sortKey: SortKey;
     filterStatusClosed: string;
     filterStatusInProgress: string;
     filterProject: string;
