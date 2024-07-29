@@ -12,9 +12,12 @@ const Header: React.FC = () => {
     const [weekNumber, setWeekNumber] = useState<number>(0);
 
     useEffect(() => {
+        const savedLocale = localStorage.getItem('locale') || 'en';
+        i18n.changeLanguage(savedLocale);
+
         const now = new Date();
         const adjustedDate = subHours(now, 11); // Уменьшаем на 11 часов
-        const week = getWeek(adjustedDate, {locale: i18n.language === 'en' ? enUS : ru});
+        const week = getWeek(adjustedDate, {locale: savedLocale === 'en' ? enUS : ru});
         setWeekNumber(week);
 
         // Устанавливаем начальную тему
@@ -23,8 +26,12 @@ const Header: React.FC = () => {
         document.body.classList.add(savedTheme + '-theme');
     }, [i18n.language]);
 
+
     const toggleLocale = () => {
-        i18n.changeLanguage(i18n.language === 'en' ? 'ru' : 'en');
+        const newLocale = i18n.language === 'en' ? 'ru' : 'en';
+        i18n.changeLanguage(newLocale).then(() => {
+            localStorage.setItem('locale', newLocale);
+        });
     };
 
     const toggleTheme = () => {
