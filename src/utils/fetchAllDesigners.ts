@@ -19,12 +19,6 @@ export interface Designer {
     }[];
 }
 
-interface ApiResponse {
-    results: Designer[];
-    next: string | null;
-    previous: string | null;
-}
-
 export interface Project {
     id: string;
     name: string;
@@ -32,25 +26,24 @@ export interface Project {
 }
 
 export async function fetchAllDesigners(): Promise<Designer[]> {
-    let allDesigners: Designer[] = [];
-    let page = 1;
-    let next: string | null = null;
-    const baseUrl = 'https://sandbox.creos.me/api/v1/designer/?limit=128&page=';
-
-    do {
-        const response = await axios.get<ApiResponse>(`${baseUrl}${page}`);
-        const data = response.data;
-        allDesigners = allDesigners.concat(data.results);
-        next = data.next;
-        page += 1;
-    } while (next !== null);
-
-    return allDesigners;
+    try {
+        const baseUrl = 'https://b460d29261043f58.mokky.dev/designers/';
+        const response = await axios.get(baseUrl);
+        if (response.status === 200) {
+            return response.data;
+        } else {
+            console.error('Error fetching designers:', response.statusText);
+            return [];
+        }
+    } catch (error) {
+        console.error('Error fetching designers:', error);
+        return [];
+    }
 }
 
 export async function fetchAllProjects(): Promise<Project[]> {
     try {
-        const baseUrl = 'https://sandbox.creos.me/api/v1/project/';
+        const baseUrl = 'https://b460d29261043f58.mokky.dev/project/';
         const response = await axios.get(baseUrl);
         if (response.status === 200) {
             return response.data;

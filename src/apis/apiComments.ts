@@ -3,7 +3,7 @@ import {Comment} from "../services/Comment.ts";
 
 export const fetchComments = async (): Promise<Comment[]> => {
     try {
-        const response = await axios.get<Comment[]>('https://sandbox.creos.me/api/v1/comment/');
+        const response = await axios.get<Comment[]>('https://b460d29261043f58.mokky.dev/comments/');
         if (!response.data || !Array.isArray(response.data)) {
             throw new Error('Ошибка при получении комментариев');
         }

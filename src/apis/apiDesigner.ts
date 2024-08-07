@@ -17,6 +17,6 @@ export interface Task {
 }
 
 export const getAllDesigners = async (): Promise<Task[]> => {
-    const response = await axios.get<Task[]>('https://sandbox.creos.me/api/v1/issue/');
+    const response = await axios.get<Task[]>('https://b460d29261043f58.mokky.dev/issue/');
     return response.data;
 };
